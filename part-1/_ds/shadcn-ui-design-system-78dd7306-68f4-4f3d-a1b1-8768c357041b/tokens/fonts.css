@@ -1,0 +1,3 @@
+/* shadcn/ui webfonts — Geist & Geist Mono, served from Google Fonts.
+   The @import declares the families shipped to consumers. */
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap');

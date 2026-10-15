@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&amp;display=swap">
+  <style>html,body{margin:0;background:#F5F5F7;color:#1A1A1A;font-family:"Noto Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}a{color:#4A2BC2}a:hover{color:#3A1F9E}*{box-sizing:border-box}</style>
+</helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column">
+  <div style="height:4px;display:flex"><span style="flex:1;background:#FF9933"></span><span style="flex:1;background:#FFFFFF"></span><span style="flex:1;background:#138808"></span></div>
+  <div style="height:32px;background:#1A1A1A;color:#FFFFFF;font-size:12px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;gap:16px"><span>Government of Assam · Inland Water Transport</span><span style="display:flex;gap:16px;align-items:center"><span>English | हिन्दी</span><span>A- A A+</span></span></div>
+  <header style="height:64px;background:#FFFFFF;border-bottom:1px solid #E0E0E0;display:flex;align-items:center;justify-content:space-between;padding:0 24px;gap:16px">
+    <div style="display:flex;align-items:center;gap:12px"><span style="width:40px;height:40px;border-radius:50%;background:#EEEAFB;color:#4A2BC2;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"></path><path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"></path><path d="M12 10v4"></path><path d="M12 2v3"></path></svg></span><span style="display:flex;flex-direction:column"><b style="font-size:16px;font-weight:700;line-height:1.2">Ferry Management System</b><span style="font-size:12px;color:#5C5C5C">Guwahati ghats · Brahmaputra</span></span></div>
+    <div style="display:flex;align-items:center;gap:16px"><span style="height:28px;padding:0 10px;border-radius:999px;background:#E8F7EC;color:#00522c;font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:#128937"></span>System online</span><span style="font-size:13px;color:#5C5C5C;font-variant-numeric:tabular-nums">{{ clock }}</span><span style="display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600"><span style="width:32px;height:32px;border-radius:50%;background:#4A2BC2;color:#FFFFFF;font-size:12px;display:flex;align-items:center;justify-content:center">RD</span>Rekha Das · Terminal manager</span></div>
+  </header>
+
+  <sc-if value="{{ jOn }}" hint-placeholder-val="{{ true }}">
+    <div style="background:#FFFFFF;border-bottom:1px solid #E0E0E0;padding:12px 24px;display:flex;flex-direction:column;gap:10px">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap"><span style="font-size:12px;font-weight:700;letter-spacing:.06em;color:#4A2BC2">GUIDED JOURNEY · A DAY AT THE GHAT</span><button type="button" onClick="{{ jHide }}" style="border:0;background:transparent;font-family:inherit;font-size:13px;color:#5C5C5C;cursor:pointer">Hide journey</button></div>
+      <div style="display:flex;gap:6px;overflow-x:auto;scrollbar-width:none">
+        <sc-for list="{{ jSteps }}" as="js" hint-placeholder-count="6"><button type="button" onClick="{{ js.go }}" style="flex:1 0 140px;min-width:140px;text-align:left;border:0;border-top:3px solid {{ js.bar }};background:{{ js.bg }};padding:8px 10px;font-family:inherit;cursor:pointer;display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;font-weight:700;color:{{ js.nc }}">{{ js.label }}</span><span style="font-size:13px;font-weight:600;color:#1A1A1A">{{ js.t }}</span></button></sc-for>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:10px 14px;border-radius:8px;background:{{ jTaskBg }}"><span style="font-size:14px;line-height:1.45"><b style="font-weight:700">{{ jTaskHead }}</b> {{ jTask }}</span><sc-if value="{{ jCanNext }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ jNext }}" style="height:36px;padding:0 16px;border:0;border-radius:8px;background:#4A2BC2;color:#FFFFFF;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer">{{ jNextLabel }}</button></sc-if></div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ jOff }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFFFF;border-bottom:1px solid #E0E0E0;padding:8px 24px"><button type="button" onClick="{{ jShow }}" style="border:0;background:transparent;font-family:inherit;font-size:13px;font-weight:600;color:#4A2BC2;cursor:pointer;padding:0">Show guided journey</button></div></sc-if>
+
+  <div style="flex:1;display:flex;min-height:0">
+    <nav aria-label="Modules" style="width:232px;flex:none;background:#FFFFFF;border-right:1px solid #E0E0E0;padding:16px 12px;display:flex;flex-direction:column;gap:4px">
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="6"><button type="button" onClick="{{ n.go }}" aria-current="{{ n.cur }}" style="height:44px;border:0;border-radius:8px;background:{{ n.bg }};color:{{ n.fg }};font-family:inherit;font-size:14px;font-weight:{{ n.fw }};display:flex;align-items:center;gap:12px;padding:0 12px;cursor:pointer;text-align:left"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="{{ n.d }}"></path></svg><span style="flex:1">{{ n.t }}</span><sc-if value="{{ n.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:#db372d;color:#FFFFFF;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center">{{ n.badge }}</span></sc-if></button></sc-for>
+    </nav>
+
+    <main style="flex:1;min-width:0;padding:24px;display:flex;flex-direction:column;gap:20px;overflow:auto">
+      <div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:12px;color:#5C5C5C">Home / {{ modTitle }}</span><h1 style="margin:0;font-size:24px;font-weight:700;line-height:1.25">{{ modTitle }}</h1><span style="font-size:14px;color:#5C5C5C">{{ modSub }}</span></div>
+
+      <sc-if value="{{ toastOn }}" hint-placeholder-val="{{ false }}"><div role="status" style="padding:12px 16px;border-radius:8px;border-left:4px solid {{ toastBar }};background:{{ toastBg }};color:{{ toastFg }};font-size:14px;font-weight:500">{{ toastMsg }}</div></sc-if>
+
+      <sc-if value="{{ isDash }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px">
+          <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="4"><div style="background:#FFFFFF;border:1px solid #E0E0E0;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;color:#5C5C5C">{{ k.l }}</span><span style="font-size:28px;font-weight:700;line-height:1.1;color:{{ k.c }};font-variant-numeric:tabular-nums">{{ k.v }}</span><span style="font-size:12px;color:#5C5C5C">{{ k.s }}</span></div></sc-for>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E0E0E0;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px">
+          <b style="font-size:16px;font-weight:700">Live ferries</b>
+          <sc-for list="{{ ferries }}" as="f" hint-placeholder-count="4"><div style="display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,2fr) auto;gap:16px;align-items:center;padding:10px 0;border-top:1px solid #F0F0F0"><span style="display:flex;flex-direction:column"><b style="font-size:14px;font-weight:600">{{ f.id }}</b><span style="font-size:12px;color:#5C5C5C">{{ f.route }}</span></span><span style="display:flex;flex-direction:column;gap:4px"><span style="height:8px;border-radius:999px;background:#F0F0F0;overflow:hidden"><span style="display:block;height:100%;width:{{ f.pct }};background:{{ f.barC }}"></span></span><span style="font-size:12px;color:#5C5C5C;font-variant-numeric:tabular-nums">{{ f.load }}</span></span><span style="height:24px;padding:0 10px;border-radius:999px;background:{{ f.chipBg }};color:{{ f.chipFg }};font-size:12px;font-weight:600;display:flex;align-items:center;white-space:nowrap">{{ f.status }}</span></div></sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isOps }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+          <sc-for list="{{ ferries }}" as="f" hint-placeholder-count="4"><div style="background:#FFFFFF;border:1px solid {{ f.cardBd }};border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px"><div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><span style="display:flex;flex-direction:column"><b style="font-size:16px;font-weight:700">{{ f.id }}</b><span style="font-size:12px;color:#5C5C5C">{{ f.route }}</span></span><span style="height:24px;padding:0 10px;border-radius:999px;background:{{ f.chipBg }};color:{{ f.chipFg }};font-size:12px;font-weight:600;display:flex;align-items:center;white-space:nowrap">{{ f.status }}</span></div><span style="height:10px;border-radius:999px;background:#F0F0F0;overflow:hidden"><span style="display:block;height:100%;width:{{ f.pct }};background:{{ f.barC }}"></span></span><span style="font-size:13px;color:#5C5C5C;font-variant-numeric:tabular-nums">{{ f.load }}</span><sc-if value="{{ f.canToggle }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ f.toggle }}" style="height:40px;border-radius:8px;border:1px solid {{ f.btnBd }};background:{{ f.btnBg }};color:{{ f.btnFg }};font-family:inherit;font-size:14px;font-weight:600;cursor:pointer">{{ f.btnLabel }}</button></sc-if></div></sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isTix }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;align-items:start">
+          <form onSubmit="{{ tixSubmit }}" style="background:#FFFFFF;border:1px solid #E0E0E0;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:14px">
+            <b style="font-size:16px;font-weight:700">Issue ticket</b>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500">Ferry<select value="{{ tF }}" onChange="{{ setF }}" style="height:44px;border:1px solid #BDBDBD;border-radius:8px;padding:0 12px;font-family:inherit;font-size:14px;background:#FFFFFF"><sc-for list="{{ ferryOpts }}" as="o" hint-placeholder-count="3"><option value="{{ o.v }}">{{ o.l }}</option></sc-for></select></label>
+            <div style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500">Passenger type<div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ ptypes }}" as="pt" hint-placeholder-count="4"><button type="button" onClick="{{ pt.pick }}" aria-pressed="{{ pt.sel }}" style="height:36px;padding:0 14px;border-radius:999px;border:1px solid {{ pt.bd }};background:{{ pt.bg }};color:{{ pt.fg }};font-family:inherit;font-size:13px;font-weight:600;cursor:pointer">{{ pt.l }}</button></sc-for></div></div>
+            <div style="display:flex;gap:12px;flex-wrap:wrap"><label style="flex:1 1 120px;display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500">Quantity<input type="number" min="1" max="20" value="{{ tQ }}" onChange="{{ setQ }}" style="height:44px;border:1px solid #BDBDBD;border-radius:8px;padding:0 12px;font-family:inherit;font-size:14px"></label><div style="flex:1 1 160px;display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500">Payment<div style="display:flex;border:1px solid #BDBDBD;border-radius:8px;overflow:hidden;height:44px"><sc-for list="{{ pmodes }}" as="pm" hint-placeholder-count="2"><button type="button" onClick="{{ pm.pick }}" style="flex:1;border:0;background:{{ pm.bg }};color:{{ pm.fg }};font-family:inherit;font-size:13px;font-weight:600;cursor:pointer">{{ pm.l }}</button></sc-for></div></div></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:4px;border-top:1px solid #F0F0F0"><span style="font-size:14px;color:#5C5C5C">Total <b style="font-size:18px;color:#1A1A1A;font-variant-numeric:tabular-nums">{{ tTotal }}</b></span><button type="submit" style="height:44px;padding:0 20px;border:0;border-radius:8px;background:#4A2BC2;color:#FFFFFF;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer">Issue ticket</button></div>
+          </form>
+          <div style="background:#FFFFFF;border:1px solid #E0E0E0;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:4px">
+            <b style="font-size:16px;font-weight:700;padding-bottom:8px">Recent tickets</b>
+            <sc-for list="{{ tickets }}" as="t" hint-placeholder-count="5"><div style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;padding:8px 0;border-top:1px solid #F0F0F0;font-size:13px"><span style="font-weight:600;font-variant-numeric:tabular-nums">{{ t.id }}</span><span style="color:#5C5C5C;min-width:0">{{ t.desc }}</span><span style="height:22px;padding:0 8px;border-radius:999px;background:{{ t.bg }};color:{{ t.fg }};font-size:11px;font-weight:600;display:flex;align-items:center">{{ t.mode }}</span></div></sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isSafe }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ safeTabs }}" as="st" hint-placeholder-count="4"><button type="button" onClick="{{ st.pick }}" style="height:36px;padding:0 14px;border-radius:999px;border:1px solid {{ st.bd }};background:{{ st.bg }};color:{{ st.fg }};font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px">{{ st.l }}<span style="font-size:11px;opacity:.8">{{ st.n }}</span></button></sc-for></div>
+        <div style="background:#FFFFFF;border:1px solid #E0E0E0;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:4px">
+          <b style="font-size:16px;font-weight:700;padding-bottom:8px">Pre-departure checklist · {{ safeFerry }}</b>
+          <sc-for list="{{ checks }}" as="c" hint-placeholder-count="5"><label style="display:flex;align-items:center;gap:12px;min-height:48px;border-top:1px solid #F0F0F0;font-size:14px;cursor:pointer"><input type="checkbox" checked="{{ c.on }}" onChange="{{ c.toggle }}" style="width:20px;height:20px;accent-color:#4A2BC2"><span style="flex:1">{{ c.t }}</span><span style="font-size:12px;font-weight:600;color:{{ c.sc }}">{{ c.s }}</span></label></sc-for>
+          <span style="padding-top:10px;font-size:13px;color:{{ safeC }};font-weight:600">{{ safeSummary }}</span>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isRev }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+          <sc-for list="{{ revK }}" as="k" hint-placeholder-count="3"><div style="background:#FFFFFF;border:1px solid #E0E0E0;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;color:#5C5C5C">{{ k.l }}</span><span style="font-size:28px;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums">{{ k.v }}</span></div></sc-for>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #E0E0E0;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px">
+          <b style="font-size:16px;font-weight:700">By route</b>
+          <sc-for list="{{ revRows }}" as="r" hint-placeholder-count="3"><div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr) auto;gap:16px;align-items:center;font-size:13px"><span>{{ r.route }}</span><span style="height:10px;border-radius:999px;background:#F0F0F0;overflow:hidden;display:flex"><span style="height:100%;width:{{ r.on }};background:#4A2BC2"></span><span style="height:100%;width:{{ r.off }};background:#B9AEEB"></span></span><span style="font-weight:600;font-variant-numeric:tabular-nums">{{ r.v }}</span></div></sc-for>
+          <span style="display:flex;gap:16px;font-size:12px;color:#5C5C5C"><span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:2px;background:#4A2BC2"></span>Online</span><span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:2px;background:#B9AEEB"></span>Counter</span></span>
+        </div>
+        <div style="display:flex;justify-content:flex-end"><button type="button" onClick="{{ submitDay }}" disabled="{{ daySent }}" style="height:44px;padding:0 20px;border:0;border-radius:8px;background:{{ dayBg }};color:#FFFFFF;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer">{{ dayLabel }}</button></div>
+      </sc-if>
+
+      <sc-if value="{{ isComp }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#FFFFFF;border:1px solid #E0E0E0;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:4px">
+          <sc-for list="{{ comps }}" as="c" hint-placeholder-count="4"><div style="display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:12px;align-items:center;padding:12px 0;border-top:1px solid #F0F0F0"><span style="display:flex;flex-direction:column;gap:2px;min-width:0"><b style="font-size:14px;font-weight:600">{{ c.t }}</b><span style="font-size:12px;color:#5C5C5C">{{ c.meta }}</span></span><span style="height:24px;padding:0 10px;border-radius:999px;background:{{ c.bg }};color:{{ c.fg }};font-size:12px;font-weight:600;display:flex;align-items:center;white-space:nowrap">{{ c.status }}</span><sc-if value="{{ c.canAct }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ c.act }}" style="height:36px;padding:0 14px;border-radius:8px;border:1px solid #4A2BC2;background:#FFFFFF;color:#4A2BC2;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap">{{ c.actLabel }}</button></sc-if></div></sc-for>
+        </div>
+      </sc-if>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    mod: "dash", j: 0, jOn: true, toast: null, tF: 0, tP: "Adult", tQ: 1, tM: "Online", safeI: 0, daySent: false, now: Date.now(),
+    ferries: [
+      { id: "MV Gateway", route: "Mazgaon → Guwahati", cap: 150, on: 118, st: "Boarding", paused: false },
+      { id: "MV Heritage", route: "Rajaduar → Guwahati", cap: 150, on: 96, st: "In transit", paused: false },
+      { id: "MV Harmony", route: "Madhyamkhanda → Guwahati", cap: 150, on: 158, st: "Boarding", paused: false },
+      { id: "MV Venture", route: "Mazgaon → Guwahati", cap: 120, on: 0, st: "Maintenance", paused: false }
+    ],
+    tickets: [
+      { id: "TK1238", f: "MV Gateway", p: "Adult", q: 2, m: "Online", amt: 40 },
+      { id: "TK1237", f: "MV Harmony", p: "Senior", q: 1, m: "Counter", amt: 10 },
+      { id: "TK1236", f: "MV Heritage", p: "Two-wheeler", q: 1, m: "Online", amt: 35 }
+    ],
+    checks: { 0: [true, true, false, false, true], 1: [true, true, true, true, true], 2: [true, false, true, true, true], 3: [false, false, false, false, false] },
+    comps: [
+      { t: "Overcrowding at Madhyamkhanda", meta: "Passenger · 10:12 AM · Safety", s: 0 },
+      { t: "Ticket counter closed early", meta: "Passenger · 09:40 AM · Service", s: 0 },
+      { t: "Refund not received for TK1102", meta: "Passenger · Yesterday · Payment", s: 1 },
+      { t: "Life jacket missing on MV Heritage", meta: "Staff · Yesterday · Safety", s: 2 }
+    ],
+    revBase: [["Mazgaon → Guwahati", 21800, 9200], ["Rajaduar → Guwahati", 14100, 8600], ["Madhyamkhanda → Guwahati", 7300, 11400]]
+  };
+  PRICE = { Adult: 20, Child: 10, Senior: 10, "Two-wheeler": 35 };
+  CHECKS = ["Life jackets for every seat", "Fire extinguishers charged", "Hull and engine inspection", "Crew briefing done", "Weather and water level cleared"];
+  MODS = [["dash", "Dashboard", "M3 3h7v9H3zM14 3h7v5h-7zM14 12h7v9h-7zM3 16h7v5H3z", "Live view of every ferry and ghat."], ["ops", "Ferry operations", "M2 21c2 1 4 1 6 0s4-1 6 0 4 1 6 0M4 18l-1-5h18l-2 5M6 13V7h12v6M12 4v3", "Capacity and boarding control per ferry."], ["tix", "Ticketing", "M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2ZM13 5v2M13 17v2M13 11v2", "Counter and online tickets in one queue."], ["safe", "Safety and compliance", "M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z", "Pre-departure checks for each ferry."], ["comp", "Complaints", "M7.9 20A9 9 0 1 0 4 16.1L2 22Z", "Passenger and staff reports, tracked to closure."], ["rev", "Revenue", "M6 3h12M6 8h12M6 13l8.5 8M6 13h3M9 13c6.667 0 6.667-10 0-10", "Today's collection by route and channel."]];
+  JOURNEY = [
+    { t: "Start the shift", mod: "dash", task: "Open the dashboard and scan the live ferries. One is over capacity.", done: s => true },
+    { t: "Stop overcrowding", mod: "ops", task: "MV Harmony has 158 people for 150 seats. Pause boarding on it.", done: s => s.ferries[2].paused },
+    { t: "Sell at the counter", mod: "tix", task: "A family arrives at the counter. Issue a ticket for MV Gateway.", done: s => s.tickets.length > 3 },
+    { t: "Clear for departure", mod: "safe", task: "Tick every pre-departure check for MV Gateway.", done: s => s.checks[0].every(Boolean) },
+    { t: "Close a complaint", mod: "comp", task: "Resolve the overcrowding complaint now that boarding is paused.", done: s => s.comps[0].s === 2 },
+    { t: "Close the day", mod: "rev", task: "Review today's collection and submit the day report.", done: s => s.daySent }
+  ];
+  componentDidMount() { this._clk = setInterval(() => this.setState({ now: Date.now() }), 30000); }
+  componentWillUnmount() { clearInterval(this._clk); clearTimeout(this._tt); }
+  toast(kind, msg) { clearTimeout(this._tt); this.setState({ toast: { kind, msg } }); this._tt = setTimeout(() => this.setState({ toast: null }), 3800); }
+  fState(f) {
+    if (f.st === "Maintenance") return ["Maintenance", "#F0F0F0", "#4D4D4D"];
+    if (f.paused) return ["Boarding paused", "#FFF4E5", "#ad4e00"];
+    if (f.on > f.cap) return ["Over capacity", "#ffecee", "#8a1a16"];
+    if (f.st === "In transit") return ["In transit", "#E6FAFA", "#006d75"];
+    return ["Boarding", "#E8F7EC", "#00522c"];
+  }
+  setFerry(i, patch) { this.setState(s => ({ ferries: s.ferries.map((f, k) => k === i ? { ...f, ...patch } : f) })); }
+  issue(e) {
+    e.preventDefault();
+    const s = this.state, f = s.ferries[s.tF], q = Math.max(1, Math.min(20, +s.tQ || 1));
+    if (f.st === "Maintenance") return this.toast("error", f.id + " is under maintenance. Choose another ferry.");
+    if (f.paused) return this.toast("warning", "Boarding is paused on " + f.id + ". Choose another ferry.");
+    if (f.on + q > f.cap) return this.toast("error", "Only " + Math.max(0, f.cap - f.on) + " seats left on " + f.id + ".");
+    const id = "TK" + (1239 + s.tickets.length - 3);
+    this.setState(st => ({ tickets: [{ id, f: f.id, p: st.tP, q, m: st.tM, amt: this.PRICE[st.tP] * q }, ...st.tickets], ferries: st.ferries.map((x, k) => k === st.tF ? { ...x, on: x.on + q } : x) }));
+    this.toast("success", id + " issued for " + f.id + ". " + q + " × " + s.tP + ".");
+  }
+  renderVals() {
+    const s = this.state, inr = n => "₹" + n.toLocaleString("en-IN"), mod = this.MODS.find(m => m[0] === s.mod);
+    const fs = s.ferries.map((f, i) => {
+      const [status, chipBg, chipFg] = this.fState(f), over = f.on > f.cap, pct = Math.min(100, Math.round(f.on / f.cap * 100));
+      return { id: f.id, route: f.route, status, chipBg, chipFg, pct: pct + "%", load: f.st === "Maintenance" ? "Not in service" : f.on + " / " + f.cap + " on board", barC: over ? "#db372d" : pct > 85 ? "#fa8c16" : "#128937", cardBd: over && !f.paused ? "#db372d" : "#E0E0E0",
+        canToggle: f.st === "Boarding", btnLabel: f.paused ? "Allow boarding" : "Pause boarding", btnBg: f.paused ? "#4A2BC2" : "#FFFFFF", btnFg: f.paused ? "#FFFFFF" : "#8a1a16", btnBd: f.paused ? "#4A2BC2" : "#db372d",
+        toggle: () => { this.setFerry(i, { paused: !f.paused }); this.toast(f.paused ? "success" : "warning", f.paused ? "Boarding resumed on " + f.id + "." : "Boarding paused on " + f.id + ". Gate staff notified."); } };
+    });
+    const ticketRev = s.tickets.slice(0, s.tickets.length - 3).reduce((a, t) => { a[t.m] += t.amt; return a; }, { Online: 0, Counter: 0 });
+    const rows = s.revBase.map(([route, on, off], i) => { const extra = s.tickets.slice(0, s.tickets.length - 3).filter(t => s.ferries.find(f => f.id === t.f).route === route); const eo = extra.filter(t => t.m === "Online").reduce((a, t) => a + t.amt, 0), ec = extra.filter(t => t.m === "Counter").reduce((a, t) => a + t.amt, 0); return { route, on: on + eo, off: off + ec }; });
+    const max = Math.max(...rows.map(r => r.on + r.off)), totOn = rows.reduce((a, r) => a + r.on, 0), totOff = rows.reduce((a, r) => a + r.off, 0);
+    const openComps = s.comps.filter(c => c.s < 2).length, alerts = s.ferries.filter(f => f.on > f.cap && !f.paused).length;
+    const sc = s.checks[s.safeI], scDone = sc.filter(Boolean).length;
+    const js = this.JOURNEY[s.j], jDone = js.done(s), last = s.j === this.JOURNEY.length - 1;
+    const tc = { success: ["#E8F7EC", "#00522c", "#128937"], warning: ["#FFF4E5", "#ad4e00", "#fa8c16"], error: ["#ffecee", "#8a1a16", "#db372d"] }[s.toast ? s.toast.kind : "success"];
+    const d = new Date(s.now);
+    return {
+      clock: d.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) + " · " + d.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" }),
+      jOn: s.jOn, jOff: !s.jOn, jHide: () => this.setState({ jOn: false }), jShow: () => this.setState({ jOn: true }),
+      jSteps: this.JOURNEY.map((x, i) => { const cur = i === s.j, dn = i < s.j || (cur && x.done(s) && i > 0); return { t: x.t, label: dn ? "Step " + (i + 1) + " · Done" : "Step " + (i + 1), bar: cur ? "#4A2BC2" : dn ? "#128937" : "#E0E0E0", bg: cur ? "#EEEAFB" : "#FFFFFF", nc: cur ? "#4A2BC2" : dn ? "#128937" : "#5C5C5C", go: () => this.setState({ j: i, mod: x.mod }) }; }),
+      jTaskHead: jDone && s.j > 0 ? "Done." : "Your task:", jTask: jDone && s.j > 0 ? (last ? "The day is closed. That's the full journey." : "Nice work. Move to the next step.") : js.task, jTaskBg: jDone && s.j > 0 ? "#E8F7EC" : "#F5F5F7",
+      jCanNext: jDone && !last || (last && jDone), jNextLabel: last ? "Start again" : "Next step →",
+      jNext: () => { if (last) { this.setState({ j: 0, mod: "dash" }); return; } const n = s.j + 1; this.setState({ j: n, mod: this.JOURNEY[n].mod, ...(this.JOURNEY[n].mod === "safe" ? { safeI: 0 } : {}), ...(this.JOURNEY[n].mod === "tix" ? { tF: 0 } : {}) }); },
+      nav: this.MODS.map(([id, t, dd]) => { const on = s.mod === id, badge = id === "comp" ? openComps : id === "ops" ? alerts : 0; return { t, d: dd, cur: on ? "page" : "false", bg: on ? "#EEEAFB" : "transparent", fg: on ? "#4A2BC2" : "#1A1A1A", fw: on ? 700 : 500, hasBadge: badge > 0, badge, go: () => this.setState({ mod: id }) }; }),
+      modTitle: mod[1], modSub: mod[3],
+      toastOn: !!s.toast, toastMsg: s.toast ? s.toast.msg : "", toastBg: tc[0], toastFg: tc[1], toastBar: tc[2],
+      isDash: s.mod === "dash", isOps: s.mod === "ops", isTix: s.mod === "tix", isSafe: s.mod === "safe", isRev: s.mod === "rev", isComp: s.mod === "comp",
+      kpis: [["Passengers on board", s.ferries.reduce((a, f) => a + f.on, 0).toLocaleString("en-IN"), "Across 4 ferries", "#1A1A1A"], ["Active ferries", s.ferries.filter(f => f.st !== "Maintenance").length + " / 4", "1 under maintenance", "#1A1A1A"], ["Collection today", inr(totOn + totOff), "Target ₹80,000", "#1A1A1A"], ["Safety alerts", String(alerts), alerts ? "Needs action now" : "All clear", alerts ? "#db372d" : "#128937"]].map(([l, v, sb, c]) => ({ l, v, s: sb, c })),
+      ferries: fs,
+      ferryOpts: s.ferries.map((f, i) => ({ v: String(i), l: f.id + " · " + f.route })), tF: String(s.tF), setF: e => this.setState({ tF: +e.target.value }),
+      ptypes: Object.keys(this.PRICE).map(l => { const on = s.tP === l; return { l: l + " · ₹" + this.PRICE[l], sel: String(on), bg: on ? "#4A2BC2" : "#FFFFFF", fg: on ? "#FFFFFF" : "#1A1A1A", bd: on ? "#4A2BC2" : "#BDBDBD", pick: () => this.setState({ tP: l }) }; }),
+      tQ: String(s.tQ), setQ: e => this.setState({ tQ: e.target.value }),
+      pmodes: ["Online", "Counter"].map(l => { const on = s.tM === l; return { l: l === "Counter" ? "Cash at counter" : "UPI / online", bg: on ? "#EEEAFB" : "#FFFFFF", fg: on ? "#4A2BC2" : "#5C5C5C", pick: () => this.setState({ tM: l }) }; }),
+      tTotal: inr(this.PRICE[s.tP] * Math.max(1, +s.tQ || 1)), tixSubmit: e => this.issue(e),
+      tickets: s.tickets.slice(0, 6).map(t => ({ id: t.id, desc: t.f + " · " + t.q + " × " + t.p + " · " + inr(t.amt), mode: t.m === "Online" ? "Online" : "Counter", bg: t.m === "Online" ? "#EEEAFB" : "#F0F0F0", fg: t.m === "Online" ? "#4A2BC2" : "#4D4D4D" })),
+      safeTabs: s.ferries.map((f, i) => { const on = s.safeI === i, n = s.checks[i].filter(Boolean).length; return { l: f.id, n: n + "/5", bg: on ? "#4A2BC2" : "#FFFFFF", fg: on ? "#FFFFFF" : "#1A1A1A", bd: on ? "#4A2BC2" : "#BDBDBD", pick: () => this.setState({ safeI: i }) }; }),
+      safeFerry: s.ferries[s.safeI].id,
+      checks: this.CHECKS.map((t, k) => ({ t, on: sc[k], s: sc[k] ? "Verified" : "Pending", sc: sc[k] ? "#128937" : "#ad4e00", toggle: () => this.setState(st => ({ checks: { ...st.checks, [st.safeI]: st.checks[st.safeI].map((v, x) => x === k ? !v : v) } })) })),
+      safeSummary: scDone === 5 ? "All checks verified. Cleared for departure." : (5 - scDone) + " checks pending. Departure is blocked.", safeC: scDone === 5 ? "#128937" : "#ad4e00",
+      revK: [["Collected today", inr(totOn + totOff)], ["Online share", Math.round(totOn / (totOn + totOff) * 100) + "%"], ["Tickets issued", String(1846 + s.tickets.length - 3)]].map(([l, v]) => ({ l, v })),
+      revRows: rows.map(r => ({ route: r.route, on: (r.on / max * 100) + "%", off: (r.off / max * 100) + "%", v: inr(r.on + r.off) })),
+      daySent: s.daySent, dayBg: s.daySent ? "#128937" : "#4A2BC2", dayLabel: s.daySent ? "Day report submitted ✓" : "Submit day report",
+      submitDay: () => { this.setState({ daySent: true }); this.toast("success", "Day report sent to the IWT district office."); },
+      comps: s.comps.map((c, i) => { const st = [["New", "#ffecee", "#8a1a16"], ["In progress", "#FFF4E5", "#ad4e00"], ["Resolved", "#E8F7EC", "#00522c"]][c.s]; return { t: c.t, meta: c.meta, status: st[0], bg: st[1], fg: st[2], canAct: c.s < 2, actLabel: c.s === 0 ? "Start review" : "Mark resolved", act: () => { this.setState(x => ({ comps: x.comps.map((y, k) => k === i ? { ...y, s: y.s + 1 } : y) })); this.toast("success", c.s === 0 ? "Review started. Passenger notified by SMS." : "Complaint resolved and closed."); } }; })
+    };
+  }
+}
+</script>
+</body>
+</html>

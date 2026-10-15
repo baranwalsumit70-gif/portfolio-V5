@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/shadcn-ui-design-system-78dd7306-68f4-4f3d-a1b1-8768c357041b/styles.css">
+  <script src="music-box.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&amp;family=Noto+Sans+Display:wght@600;700&amp;display=swap">
+  <style>html,body{margin:0;background:#FFFFFF;color:#000000;font-family:"Noto Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit}a:hover{opacity:.7}
+  @keyframes sumoSway{0%,100%{transform:translateX(0) rotate(0)}25%{transform:translateX(-3px) rotate(-8deg)}75%{transform:translateX(3px) rotate(8deg)}}</style>
+</helmet>
+<div style="position:sticky;top:0;z-index:10;background:rgb(255 255 255 / .92);backdrop-filter:blur(8px);border-bottom:1px solid #EDEDED">
+  <div style="max-width:1120px;margin:0 auto;padding:0 clamp(20px,4vw,48px);height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px">
+    <a href="Portfolio v2.dc.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;font-size:14px;font-weight:500;flex:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>Portfolio</a>
+    <div style="display:flex;gap:4px;overflow-x:auto;font-size:13px;scrollbar-width:none"><sc-for list="{{ chapters }}" as="ch" hint-placeholder-count="7"><a href="{{ ch.href }}" style="text-decoration:none;white-space:nowrap;height:30px;padding:0 10px;border-radius:999px;display:flex;align-items:center;background:{{ ch.bg }};color:{{ ch.fg }};transition:background .15s, color .15s" style-hover="background:#EEEAFB;color:#4A2BC2;opacity:1">{{ ch.t }}</a></sc-for></div>
+  </div>
+  <div style="height:2px;width:{{ readPct }};background:#4A2BC2;transition:width .1s linear"></div>
+</div>
+
+<main style="max-width:1120px;margin:0 auto;padding:0 clamp(20px,4vw,48px) 96px;display:flex;flex-direction:column;gap:clamp(88px,13vh,140px)">
+
+  <header style="display:flex;flex-direction:column;gap:24px;padding-top:clamp(56px,10vh,112px)">
+    <h1 style="margin:0;font-family:'Noto Sans Display','Noto Sans',sans-serif;font-size:clamp(44px,7vw,88px);font-weight:700;letter-spacing:-0.05em;line-height:.95;text-wrap:balance">Brahmaputra Ferry ERP</h1>
+    <p style="margin:0;max-width:660px;font-size:clamp(18px,2vw,22px);line-height:1.45;text-wrap:pretty">One live system for Inland Water Transport, Assam. Operations, ticketing, safety and revenue for every ghat on a single screen.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ metaChips }}" as="m" hint-placeholder-count="4"><span style="flex:none;white-space:nowrap;height:32px;padding:0 14px;border-radius:999px;border:1px solid #E5E5E5;display:flex;align-items:center;gap:6px;font-size:13px"><b style="font-weight:600">{{ m.k }}</b><span style="color:#737373">{{ m.v }}</span></span></sc-for></div>
+    
+    <div style="margin-top:16px">{{ heroImg }}</div>
+  </header>
+
+  <section id="ch-context" style="display:flex;flex-direction:column;gap:24px">
+    <span style="font-size:13px;font-weight:600;color:#4A2BC2">01 · Context</span>
+    <h2 style="margin:0;font-size:clamp(30px,4vw,48px);font-weight:600;letter-spacing:-0.04em;line-height:1.05">A river crossing, run on paper.</h2>
+    <p style="margin:0;max-width:680px;font-size:clamp(16px,1.6vw,18px);line-height:1.55;text-wrap:pretty">Ferries across the Brahmaputra link Guwahati and North Guwahati. Most of the system is still manual, which slows decisions, risks safety and frustrates passengers.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px">
+      <sc-for list="{{ users }}" as="u" hint-placeholder-count="4"><div style="padding:20px;border-radius:14px;border:1px solid #EDEDED;display:flex;flex-direction:column;gap:6px"><span style="font-size:12px;font-weight:600;color:#4A2BC2">{{ u.n }}</span><span style="font-size:15px;line-height:1.45">{{ u.t }}</span></div></sc-for>
+    </div>
+  </section>
+
+  <section id="ch-problem" style="display:flex;flex-direction:column;gap:24px">
+    <span style="font-size:13px;font-weight:600;color:#4A2BC2">02 · Problem</span>
+    <h2 style="margin:0;font-size:clamp(30px,4vw,48px);font-weight:600;letter-spacing:-0.04em;line-height:1.05">No one sees the whole river.</h2>
+    <p style="margin:0;max-width:680px;font-size:clamp(16px,1.6vw,18px);line-height:1.55;text-wrap:pretty">Without a central, real-time system, each terminal works alone. That leads to five recurring failures.</p>
+    <div style="display:flex;flex-direction:column;border-bottom:1px solid #EDEDED">
+      <sc-for list="{{ findings }}" as="f" hint-placeholder-count="5"><div style="display:grid;grid-template-columns:48px minmax(0,1fr);gap:16px;padding:18px 0;border-top:1px solid #EDEDED;align-items:baseline"><span style="font-size:13px;font-weight:600;color:#A1A1A1;font-variant-numeric:tabular-nums">{{ f.n }}</span><span style="font-size:clamp(17px,1.8vw,20px);font-weight:500;letter-spacing:-0.015em;line-height:1.35">{{ f.t }}</span></div></sc-for>
+    </div>
+  </section>
+
+  <section id="ch-research" style="display:flex;flex-direction:column;gap:24px">
+    <span style="font-size:13px;font-weight:600;color:#4A2BC2">03 · Research</span>
+    <h2 style="margin:0;font-size:clamp(30px,4vw,48px);font-weight:600;letter-spacing:-0.04em;line-height:1.05">From the ghats to the system.</h2>
+    <p style="margin:0;max-width:680px;font-size:clamp(16px,1.6vw,18px);line-height:1.55;text-wrap:pretty">Field visits to Mazgaon, Rajaduar and Madhyamkhanda ghats, then systems mapping, two personas and three role-based flows.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px">
+      <sc-for list="{{ steps }}" as="st" hint-placeholder-count="5"><div style="padding:20px;border-radius:14px;border:1px solid #EDEDED;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;font-weight:600;color:#4A2BC2">{{ st.n }}</span><b style="font-size:17px;font-weight:600;letter-spacing:-0.02em">{{ st.t }}</b><span style="font-size:14px;line-height:1.5;color:#525252">{{ st.d }}</span></div></sc-for>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:24px;margin-top:8px">
+      <sc-for list="{{ proc }}" as="pc" hint-placeholder-count="4"><figure style="margin:0;display:flex;flex-direction:column;gap:10px">{{ pc.img }}<figcaption style="font-size:13px;color:#525252">{{ pc.t }}</figcaption></figure></sc-for>
+    </div>
+  </section>
+
+  <section id="ch-insight" style="display:flex;flex-direction:column;gap:24px">
+    <span style="font-size:13px;font-weight:600;color:#4A2BC2">04 · Insight</span>
+    <p style="margin:0;max-width:900px;font-size:clamp(28px,4vw,48px);font-weight:600;letter-spacing:-0.04em;line-height:1.12;text-wrap:balance">Most failures don't come from missing boats or terminals. They come from missing <span style="color:#4A2BC2">visibility</span>.</p>
+  </section>
+
+  <section id="ch-modules" style="display:flex;flex-direction:column;gap:20px">
+    <span style="font-size:13px;font-weight:600;color:#4A2BC2">05 · Design</span>
+    <h2 style="margin:0;font-size:clamp(30px,4vw,48px);font-weight:600;letter-spacing:-0.04em;line-height:1.05">7 modules, 1 dashboard.</h2>
+    <p style="margin:0;max-width:680px;font-size:clamp(16px,1.6vw,18px);line-height:1.55;text-wrap:pretty">Each module answers one question an authority asks every day. Pick one to see the screen.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ modTabs }}" as="mt" hint-placeholder-count="7"><button type="button" onClick="{{ mt.pick }}" aria-pressed="{{ mt.sel }}" style="flex:none;white-space:nowrap;height:36px;padding:0 16px;border-radius:999px;border:1px solid {{ mt.bd }};background:{{ mt.bg }};color:{{ mt.fg }};font-family:inherit;font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:8px;transition:background .15s, color .15s, border-color .15s"><span style="font-size:12px;opacity:.6;font-variant-numeric:tabular-nums">{{ mt.n }}</span>{{ mt.t }}</button></sc-for></div>
+    <sc-for list="{{ modCur }}" as="mc" hint-placeholder-count="1"><p style="margin:0;max-width:760px;font-size:16px;line-height:1.55;text-wrap:pretty"><b style="font-weight:600">{{ mc.t }}.</b> {{ mc.d }}</p></sc-for>
+    <div style="position:relative;left:50%;transform:translateX(-50%);width:min(1320px, calc(100vw - 24px))"><sc-for list="{{ modAll }}" as="ma" hint-placeholder-count="1">{{ ma.img }}</sc-for></div>
+  </section>
+
+  <section id="ch-outcome" style="display:flex;flex-direction:column;gap:24px">
+    <span style="font-size:13px;font-weight:600;color:#4A2BC2">06 · Outcome</span>
+    <h2 style="margin:0;font-size:clamp(30px,4vw,48px);font-weight:600;letter-spacing:-0.04em;line-height:1.05">One source of truth.</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px">
+      <sc-for list="{{ outcomes }}" as="oc" hint-placeholder-count="3"><div style="padding:24px;border-radius:14px;border:1px solid #EDEDED;display:flex;flex-direction:column;gap:8px"><span style="font-size:clamp(28px,3.4vw,40px);font-weight:600;letter-spacing:-0.04em;line-height:1;color:#4A2BC2">{{ oc.v }}</span><span style="font-size:14px;line-height:1.5;color:#525252">{{ oc.l }}</span></div></sc-for>
+    </div>
+    <span style="font-size:13px;color:#737373">Design outcomes. Not yet measured in deployment.</span>
+  </section>
+
+  <section id="ch-learn" style="display:flex;flex-direction:column;gap:24px">
+    <span style="font-size:13px;font-weight:600;color:#4A2BC2">07 · What I learned</span>
+    <h2 style="margin:0;font-size:clamp(30px,4vw,48px);font-weight:600;letter-spacing:-0.04em;line-height:1.05">Version 1 had no system.</h2>
+    <p style="margin:0;max-width:680px;font-size:clamp(16px,1.6vw,18px);line-height:1.55;text-wrap:pretty">I designed the first dashboard screen by screen, without a design system. It worked, but reviewing it later showed the cost.</p>
+    <div style="display:flex;flex-direction:column;border-bottom:1px solid #EDEDED">
+      <sc-for list="{{ gaps }}" as="g" hint-placeholder-count="4"><div style="display:grid;grid-template-columns:48px minmax(0,1fr) minmax(0,1.4fr);gap:16px;padding:18px 0;border-top:1px solid #EDEDED;align-items:baseline"><span style="font-size:13px;font-weight:600;color:#A1A1A1;font-variant-numeric:tabular-nums">{{ g.n }}</span><b style="font-size:clamp(16px,1.7vw,19px);font-weight:600;letter-spacing:-0.015em">{{ g.t }}</b><span style="font-size:15px;line-height:1.5;color:#525252">{{ g.d }}</span></div></sc-for>
+    </div>
+    <p style="margin:0;max-width:680px;font-size:clamp(16px,1.6vw,18px);line-height:1.55;text-wrap:pretty">So I studied UX4G Design System 3.0, the Government of India's standard for public services, and rebuilt the ERP on it.</p>
+  </section>
+
+  <section id="ch-v2" style="display:flex;flex-direction:column;gap:24px">
+    <span style="font-size:13px;font-weight:600;color:#4A2BC2">08 · Version 2</span>
+    <h2 style="margin:0;font-size:clamp(30px,4vw,48px);font-weight:600;letter-spacing:-0.04em;line-height:1.05">Rebuilt on UX4G 3.0.</h2>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <sc-for list="{{ ux4g }}" as="ux" hint-placeholder-count="4"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px;padding:20px;border-radius:14px;border:1px solid #EDEDED"><b style="font-size:16px;font-weight:600">{{ ux.t }}</b><span style="font-size:14px;line-height:1.5;color:#737373"><b style="font-weight:600;color:#A1A1A1">Before ·</b> {{ ux.b }}</span><span style="font-size:14px;line-height:1.5;color:#000000"><b style="font-weight:600;color:#4A2BC2">After ·</b> {{ ux.a }}</span></div></sc-for>
+    </div>
+    <h3 style="margin:16px 0 0;font-size:clamp(22px,2.6vw,30px);font-weight:600;letter-spacing:-0.03em">Designed around one shift.</h3>
+    <p style="margin:0;max-width:680px;font-size:16px;line-height:1.55;text-wrap:pretty">Version 2 also follows a real day. Rekha Das runs the Mazgaon terminal, and each module maps to a moment in her shift.</p>
+    <div style="display:flex;flex-direction:column;border-bottom:1px solid #EDEDED">
+      <sc-for list="{{ journey }}" as="jy" hint-placeholder-count="6"><div style="display:grid;grid-template-columns:48px minmax(0,1fr) minmax(0,1.4fr);gap:16px;padding:16px 0;border-top:1px solid #EDEDED;align-items:baseline"><span style="font-size:13px;font-weight:600;color:#4A2BC2;font-variant-numeric:tabular-nums">{{ jy.n }}</span><b style="font-size:16px;font-weight:600">{{ jy.t }}</b><span style="font-size:15px;line-height:1.5;color:#525252">{{ jy.d }}</span></div></sc-for>
+    </div>
+  </section>
+
+  <section id="ch-proto" style="display:flex;flex-direction:column;gap:20px">
+    <span style="font-size:13px;font-weight:600;color:#4A2BC2">09 · Prototype</span>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap"><h2 style="margin:0;font-size:clamp(30px,4vw,48px);font-weight:600;letter-spacing:-0.04em;line-height:1.05">Try version 2.</h2><a href="Ferry ERP Prototype UX4G.dc.html" target="_blank" rel="noopener" style="height:40px;padding:0 18px;border-radius:999px;background:#4A2BC2;color:#FFFFFF;font-size:14px;font-weight:500;text-decoration:none;display:flex;align-items:center">Open full screen ↗</a></div>
+    <sc-if value="{{ protoWide }}" hint-placeholder-val="{{ true }}">
+      <div style="position:relative;left:50%;transform:translateX(-50%);width:min(1440px, calc(100vw - 24px));border-radius:16px;background:#F5F5F5;padding:clamp(8px,1.2vw,14px);box-sizing:border-box">
+        <div onMouseLeave="{{ protoSleep }}" style="position:relative;width:100%;aspect-ratio:1440/960;border-radius:10px;overflow:hidden;background:#FFFFFF"><iframe src="Ferry ERP Prototype UX4G.dc.html" title="Ferry ERP prototype" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
+          <sc-if value="{{ protoIdle }}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{ protoWake }}" aria-label="Interact with the prototype" style="position:absolute;inset:0;border:0;padding:0 0 28px;background:transparent;cursor:pointer;display:flex;align-items:flex-end;justify-content:center"><span style="height:40px;padding:0 18px;border-radius:999px;background:#000000;color:#FFFFFF;font-family:inherit;font-size:14px;font-weight:500;display:flex;align-items:center">Click to interact</span></button></sc-if>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ protoNarrow }}" hint-placeholder-val="{{ false }}">
+      <div style="border-radius:16px;background:#000000;color:#FFFFFF;padding:24px;display:flex;flex-direction:column;gap:16px"><span style="font-size:15px;line-height:1.5">The prototype is built for desktop. Open it in a new tab to try it.</span><a href="Ferry ERP Prototype UX4G.dc.html" target="_blank" rel="noopener" style="height:44px;width:max-content;padding:0 20px;border-radius:999px;background:#4A2BC2;color:#FFFFFF;font-size:14px;font-weight:500;text-decoration:none;display:flex;align-items:center">Open prototype ↗</a></div>
+    </sc-if>
+  </section>
+
+  <a href="HR Case Study v4.dc.html" style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:28px 0;border-top:1px solid #EDEDED;text-decoration:none"><span style="display:flex;flex-direction:column;gap:4px"><span style="font-size:13px;color:#737373">Next project</span><span style="font-size:clamp(22px,3vw,32px);font-weight:600;letter-spacing:-0.03em">SaaS HR Smart Companion</span></span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a>
+</main>
+
+<a href="Portfolio v2.dc.html?chat=1" aria-label="Ask Sumit anything" title="Ask Sumit anything" style="position:fixed;right:20px;bottom:20px;z-index:50;width:44px;height:44px;box-sizing:border-box;padding:0;border:1px solid #E5E5E5;border-radius:50%;background:#FFFFFF;color:#000000;box-shadow:0 8px 24px -12px rgb(0 0 0 / .35);display:flex;align-items:center;justify-content:center;text-decoration:none"><span style="width:100%;height:100%;border-radius:50%;display:flex;align-items:center;justify-content:center" style-hover="animation:sumoSway .9s ease-in-out infinite"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="overflow:visible"><circle cx="12" cy="4.2" r="2.2" fill="currentColor" stroke="none"></circle><circle cx="12" cy="14" r="7.5"></circle><path d="M9 13.2h.01"></path><path d="M15 13.2h.01"></path><path d="M9.5 16.2c1.4 1.4 3.6 1.4 5 0"></path></svg></span></a>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { mod: 0, active: -1, rp: 0, narrow: false, protoLive: false };
+  CH = [["Context", "context"], ["Problem", "problem"], ["Research", "research"], ["Insight", "insight"], ["Design", "modules"], ["Outcome", "outcome"], ["Learning", "learn"], ["Version 2", "v2"], ["Prototype", "proto"]];
+  MODS = [
+    ["Dashboard", "ferry-dashboard-content", "Live ferry movement, capacity and boarding status in one overview."],
+    ["Ticketing", "ferry-ticketing", "Fast, high-volume ticketing with CSV export and a manual fallback for low connectivity."],
+    ["Terminals and routes", "ferry-routes", "Routes, timings, frequency, delays and route-level risk in one scannable view."],
+    ["Ferry operations", "ferry-ops", "Capacity bars and status per ferry, with pause and allow boarding controls."],
+    ["Revenue and finance", "ferry-revenue", "Daily and weekly revenue, online to offline ratio and route variance, with leakage flags."],
+    ["Safety and compliance", "ferry-safety", "Life jackets, extinguishers and inspection schedules tracked per ferry."],
+    ["Complaints", "ferry-complaints", "A closed loop from new to resolved, prioritised by safety and service gaps."]
+  ];
+  componentDidMount() {
+    this._onScroll = () => { if (this._raf) return; this._raf = requestAnimationFrame(() => { this._raf = 0; let a = -1; this.CH.forEach(([, id], i) => { const el = document.getElementById("ch-" + id); if (el && el.getBoundingClientRect().top < 160) a = i; }); const d = document.documentElement, m = d.scrollHeight - d.clientHeight, p = m > 0 ? Math.round(d.scrollTop / m * 1000) / 10 : 0; if (a !== this.state.active || p !== this.state.rp) this.setState({ active: a, rp: p }); }); };
+    this._onResize = () => { const n = window.innerWidth < 720; if (n !== this.state.narrow) this.setState({ narrow: n }); };
+    window.addEventListener("scroll", this._onScroll, { passive: true }); window.addEventListener("resize", this._onResize); this._onResize(); this._onScroll();
+    this._io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = 1; e.target.style.transform = "none"; this._io.unobserve(e.target); } }), { threshold: 0.06 });
+    document.querySelectorAll("main > section").forEach(el => { el.style.scrollMarginTop = "72px"; el.style.opacity = 0; el.style.transform = "translateY(24px)"; el.style.transition = "opacity .7s ease, transform .7s ease"; this._io.observe(el); });
+  }
+  componentWillUnmount() { this._io && this._io.disconnect(); window.removeEventListener("scroll", this._onScroll); window.removeEventListener("resize", this._onResize); }
+  im(src, alt, style, lazy) { return React.createElement("img", { src, alt, decoding: "async", loading: lazy ? "lazy" : undefined, style: { display: "block", width: "100%", height: "auto", ...style } }); }
+  scrollTo(id) { const el = document.getElementById(id); if (!el) return; el.style.opacity = 1; el.style.transform = "none"; window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 72, behavior: "smooth" }); }
+  renderVals() {
+    const s = this.state, nn = i => String(i + 1).padStart(2, "0"), cur = this.MODS[s.mod];
+    return {
+      chapters: this.CH.map(([t, id], i) => ({ t, href: "#ch-" + id, bg: s.active === i ? "#EEEAFB" : "transparent", fg: s.active === i ? "#4A2BC2" : "#737373" })),
+      readPct: s.rp + "%",
+      heroImg: this._hero || (this._hero = this.im("assets/ferry-dashboard.webp", "Ferry ERP dashboard on a laptop", { borderRadius: "14px" })),
+      metaChips: [["Role", "Systems and interface design"], ["Type", "Government ERP"], ["Client", "IWT Assam"], ["Platform", "Desktop"]].map(([k, v]) => ({ k, v })),
+      users: [["Daily commuters", "Students, office workers and traders"], ["Vehicles", "Two-wheelers and light vehicles"], ["Visitors", "Tourists and local communities"], ["Operators", "Public and private, with split governance"]].map(([n, t]) => ({ n, t })),
+      findings: ["No real-time view of passengers on board", "Overcapacity during peak hours", "Manual revenue logs that mismatch and leak", "Safety checks that react instead of prevent", "Information scattered across terminals"].map((t, i) => ({ n: nn(i), t })),
+      steps: [["Field research", "Ghat visits and conversations with staff and commuters."], ["Systems thinking", "Stakeholder value web and PESTEL analysis."], ["Analysis", "80/20, garbage in garbage out, and comparison with rail, metro and bus."], ["Define", "Two personas: a terminal manager and an authority admin."], ["Flows", "Admin, terminal manager and ticket validation flows."]].map(([t, d], i) => ({ n: nn(i), t, d })),
+      proc: this._proc || (this._proc = [["research", "Field research at the ghats"], ["stakeholders", "Stakeholder value web"], ["personas", "Personas"], ["flows", "Admin user flow"]].map(([f, t]) => ({ t, img: this.im("assets/ferry/" + f + ".webp", t, { maxWidth: "520px", borderRadius: "10px" }, true) }))),
+      modTabs: this.MODS.map(([t], i) => { const on = s.mod === i; return { t, n: nn(i), sel: String(on), bg: on ? "#000000" : "#FFFFFF", fg: on ? "#FFFFFF" : "#000000", bd: on ? "#000000" : "#E5E5E5", pick: () => this.setState({ mod: i }) }; }),
+      modCur: [{ t: cur[0], d: cur[2] }],
+      modAll: this.MODS.map(([t, f], i) => ({ img: this.im("assets/" + f + ".webp", t, { display: s.mod === i ? "block" : "none", borderRadius: "12px" }, i > 0) })),
+      outcomes: [["Real time", "Capacity, ferry status and safety alerts across terminals"], ["1 system", "Operations, ticketing, safety and revenue together"], ["Closed loop", "Complaints tracked from submission to closure"]].map(([v, l]) => ({ v, l })),
+      journey: [["Start the shift", "Scan every ferry's load and status on one dashboard."], ["Stop overcrowding", "MV Harmony is over capacity. Pause boarding in one tap."], ["Sell at the counter", "Issue a ticket. Seats left and maintenance are checked before it prints."], ["Clear for departure", "Tick a five-point safety checklist. Departure stays blocked until it's done."], ["Close a complaint", "Move the overcrowding report from new to resolved."], ["Close the day", "Review collection by route and channel, then submit the day report."]].map(([t, d], i) => ({ n: nn(i), t, d })),
+      gaps: [["Inconsistent parts", "Buttons, chips and tables were drawn differently on each screen."], ["Colour without meaning", "Green, orange and red were picked by eye, not tied to a status."], ["English only", "No Hindi or Assamese support for staff at the ghats."], ["Accessibility unchecked", "Small text and low contrast in places, with no text-size control."]].map(([t, d], i) => ({ n: String(i + 1).padStart(2, "0"), t, d })),
+      ux4g: [["Typography", "Inter, English only.", "Noto Sans for English and Hindi, with a system fallback on slow networks."], ["Colour", "Navy plus ad hoc status colours.", "UX4G primary #4A2BC2 and semantic green, orange and red for boarding, paused and over capacity."], ["Components", "Custom per screen.", "UX4G buttons, chips, checklists and tables, reused across all six modules."], ["Government header", "None.", "Tricolour strip, language switch and text-size controls."]].map(([t, b, a]) => ({ t, b, a })),
+      protoWide: !s.narrow, protoNarrow: s.narrow, protoIdle: !s.protoLive,
+      protoWake: () => this.setState({ protoLive: true }), protoSleep: () => this.setState({ protoLive: false }),
+      goProto: e => { e.preventDefault(); this.scrollTo("ch-proto"); }
+    };
+  }
+}
+</script>
+</body>
+</html>

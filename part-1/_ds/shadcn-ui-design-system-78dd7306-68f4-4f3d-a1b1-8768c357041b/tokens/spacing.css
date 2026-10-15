@@ -1,0 +1,18 @@
+/* shadcn/ui — Spacing tokens. Base unit --spacing = 0.25rem (4px). Tailwind scale. */
+:root {
+  --spacing: 0.25rem;
+  --spacing-0: 0px;
+  --spacing-0-5: calc(var(--spacing) * 0.5); /* 2px  */
+  --spacing-1: calc(var(--spacing) * 1);     /* 4px  */
+  --spacing-1-5: calc(var(--spacing) * 1.5); /* 6px  */
+  --spacing-2: calc(var(--spacing) * 2);     /* 8px  */
+  --spacing-2-5: calc(var(--spacing) * 2.5); /* 10px */
+  --spacing-3: calc(var(--spacing) * 3);     /* 12px */
+  --spacing-4: calc(var(--spacing) * 4);     /* 16px */
+  --spacing-5: calc(var(--spacing) * 5);     /* 20px */
+  --spacing-6: calc(var(--spacing) * 6);     /* 24px */
+  --spacing-8: calc(var(--spacing) * 8);     /* 32px */
+  --spacing-10: calc(var(--spacing) * 10);   /* 40px */
+  --spacing-12: calc(var(--spacing) * 12);   /* 48px */
+  --spacing-16: calc(var(--spacing) * 16);   /* 64px */
+}

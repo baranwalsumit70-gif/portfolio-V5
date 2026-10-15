@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/shadcn-ui-design-system-78dd7306-68f4-4f3d-a1b1-8768c357041b/styles.css">
+  <script src="image-slot.js"></script>
+  <script src="music-box.js"></script>
+  <style>html,body{margin:0;background:#FFFFFF;color:#000000;font-family:var(--font-sans);-webkit-font-smoothing:antialiased}a{color:inherit}a:hover{opacity:.7}
+  @keyframes sumoSway{0%,100%{transform:translateX(0) rotate(0)}25%{transform:translateX(-3px) rotate(-8deg)}75%{transform:translateX(3px) rotate(8deg)}}</style>
+</helmet>
+<div style="position:sticky;top:0;z-index:10;background:rgb(255 255 255 / .92);backdrop-filter:blur(8px);border-bottom:1px solid #EDEDED">
+  <div style="max-width:1120px;margin:0 auto;padding:0 clamp(20px,4vw,48px);height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px">
+    <a href="Portfolio v2.dc.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;font-size:14px;font-weight:500;flex:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>Portfolio</a>
+    <div style="display:flex;gap:4px;overflow-x:auto;font-size:13px;scrollbar-width:none"><sc-for list="{{ chapters }}" as="ch" hint-placeholder-count="6"><a href="{{ ch.href }}" style="text-decoration:none;white-space:nowrap;height:30px;padding:0 10px;border-radius:999px;display:flex;align-items:center;background:{{ ch.bg }};color:{{ ch.fg }};transition:background .15s, color .15s" style-hover="background:#E9EDFA;color:#1E3FA8;opacity:1">{{ ch.t }}</a></sc-for></div>
+  </div>
+  <div style="height:2px;width:{{ readPct }};background:#1E3FA8;transition:width .1s linear"></div>
+</div>
+
+<main style="max-width:1120px;margin:0 auto;padding:0 clamp(20px,4vw,48px) 96px;display:flex;flex-direction:column;gap:clamp(88px,13vh,140px)">
+
+  <header style="display:flex;flex-direction:column;gap:24px;padding-top:clamp(56px,10vh,112px)">
+    <h1 style="margin:0;font-size:clamp(48px,8vw,96px);font-weight:600;letter-spacing:-0.05em;line-height:.92">Angara</h1>
+    <p style="margin:0;max-width:640px;font-size:clamp(18px,2vw,22px);line-height:1.45;text-wrap:pretty">A product detail page redesign for a fine jewellery brand. Clearer choices, trust up front, and a price that never surprises.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ metaChips }}" as="m" hint-placeholder-count="4"><span style="flex:none;white-space:nowrap;height:32px;padding:0 14px;border-radius:999px;border:1px solid #E5E5E5;display:flex;align-items:center;gap:6px;font-size:13px"><b style="font-weight:600">{{ m.k }}</b><span style="color:#737373">{{ m.v }}</span></span></sc-for></div>
+    <a href="#ch-proto" onClick="{{ goProto }}" style="height:44px;width:max-content;align-self:flex-start;white-space:nowrap;padding:0 20px;border-radius:999px;background:#1E3FA8;color:#FFFFFF;font-size:14px;font-weight:500;text-decoration:none;display:flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 3.5v17a1 1 0 0 0 1.5.86l14-8.5a1 1 0 0 0 0-1.72l-14-8.5A1 1 0 0 0 6 3.5Z"></path></svg>Try the prototype</a>
+    <img src="assets/angara-hero.png" alt="Redesigned Angara product page on a tablet" decoding="async" style="display:block;width:100%;height:auto;margin-top:16px;border-radius:14px">
+  </header>
+
+  <section id="ch-brief" style="display:flex;flex-direction:column;gap:24px">
+    <span style="font-size:13px;font-weight:600;color:#1E3FA8">01 · Brief</span>
+    <h2 style="margin:0;font-size:clamp(30px,4vw,48px);font-weight:600;letter-spacing:-0.04em;line-height:1.05">An expensive choice, made online.</h2>
+    <p style="margin:0;max-width:680px;font-size:clamp(16px,1.6vw,18px);line-height:1.55;text-wrap:pretty">Find the gaps in Angara's product page and redesign it for desktop and mobile, with a smooth customisation flow for US shoppers aged 25 to 65.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px">
+      <sc-for list="{{ stats }}" as="st" hint-placeholder-count="3">
+        <div style="padding:24px;border-radius:14px;border:1px solid #EDEDED;display:flex;flex-direction:column;gap:8px"><span style="font-size:clamp(32px,4vw,44px);font-weight:600;letter-spacing:-0.04em;line-height:1">{{ st.v }}</span><span style="font-size:14px;line-height:1.5;color:#525252">{{ st.l }}</span></div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="ch-problems" style="display:flex;flex-direction:column;gap:24px">
+    <span style="font-size:13px;font-weight:600;color:#1E3FA8">02 · Problems</span>
+    <h2 style="margin:0;font-size:clamp(30px,4vw,48px);font-weight:600;letter-spacing:-0.04em;line-height:1.05">6 gaps on the current page.</h2>
+    <p style="margin:0;max-width:680px;font-size:clamp(16px,1.6vw,18px);line-height:1.55;text-wrap:pretty">I walked through the live page on desktop and mobile. These six issues slowed buyers down or made them doubt the purchase.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(24px,4vw,56px);align-items:start;margin-top:8px">
+      <div style="display:flex;flex-direction:column;border-bottom:1px solid #EDEDED">
+        <sc-for list="{{ problems }}" as="pb" hint-placeholder-count="5">
+          <div style="border-top:1px solid #EDEDED;padding:18px 0;display:flex;flex-direction:column;gap:12px">
+            <button type="button" onClick="{{ pb.pick }}" aria-expanded="{{ pb.sel }}" style="all:unset;cursor:pointer;display:flex;align-items:flex-start;gap:16px;line-height:1.25"><span style="flex:none;padding-top:4px;font-size:13px;font-weight:600;color:{{ pb.nc }};font-variant-numeric:tabular-nums">{{ pb.n }}</span><b style="display:block;line-height:1.25;font-size:clamp(18px,2vw,22px);font-weight:600;letter-spacing:-0.025em;color:{{ pb.tc }};transition:color .15s">{{ pb.t }}</b></button>
+            <sc-if value="{{ pb.on }}" hint-placeholder-val="{{ false }}"><div style="padding-left:32px;display:flex;flex-direction:column;gap:12px"><span style="font-size:15px;line-height:1.55;color:#525252;text-wrap:pretty">{{ pb.d }}</span><a href="#ch-fixes" onClick="{{ pb.toFix }}" style="width:max-content;font-size:14px;font-weight:500;color:#1E3FA8;text-decoration:none">See the fix →</a></div></sc-if>
+          </div>
+        </sc-for>
+      </div>
+      <div style="position:sticky;top:88px;aspect-ratio:4/3">
+        <sc-for list="{{ problems }}" as="pb" hint-placeholder-count="1">{{ pb.srcImg }}</sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="ch-insight" style="display:flex;flex-direction:column;gap:24px">
+    <span style="font-size:13px;font-weight:600;color:#1E3FA8">03 · Insight</span>
+    <p style="margin:0;max-width:900px;font-size:clamp(28px,4vw,48px);font-weight:600;letter-spacing:-0.04em;line-height:1.12;text-wrap:balance">About 80% of the jewellery journey happens online. The page has to answer <span style="color:#1E3FA8">quality, price and trust</span> before the buyer scrolls.</p>
+  </section>
+
+  <section id="ch-fixes" style="display:flex;flex-direction:column;gap:24px">
+    <span style="font-size:13px;font-weight:600;color:#1E3FA8">04 · Fixes</span>
+    <h2 style="margin:0;font-size:clamp(30px,4vw,48px);font-weight:600;letter-spacing:-0.04em;line-height:1.05">Before and after.</h2>
+    <p style="margin:0;max-width:680px;font-size:clamp(16px,1.6vw,18px);line-height:1.55;text-wrap:pretty">Each fix answers one gap, in the same order. Pick one to compare the old screen with the redesign.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ fixTabs }}" as="ft" hint-placeholder-count="5"><button type="button" onClick="{{ ft.pick }}" aria-pressed="{{ ft.sel }}" style="flex:none;white-space:nowrap;height:36px;padding:0 16px;border-radius:999px;border:1px solid {{ ft.bd }};background:{{ ft.bg }};color:{{ ft.fg }};font-family:inherit;font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:8px;transition:background .15s, color .15s, border-color .15s"><span style="font-size:12px;opacity:.6;font-variant-numeric:tabular-nums">{{ ft.n }}</span>{{ ft.t }}</button></sc-for></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:16px">
+      <div style="display:flex;flex-direction:column;gap:10px"><span style="font-size:13px;font-weight:600;color:#737373">Before</span><div style="position:relative;aspect-ratio:1/1"><sc-for list="{{ fixAll }}" as="fa" hint-placeholder-count="1">{{ fa.beforeImg }}</sc-for></div></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><span style="font-size:13px;font-weight:600;color:#1E3FA8">After</span><div style="position:relative;aspect-ratio:1/1"><sc-for list="{{ fixAll }}" as="fa" hint-placeholder-count="1">{{ fa.afterImg }}</sc-for></div></div>
+    </div>
+    <sc-for list="{{ fixCur }}" as="fc" hint-placeholder-count="1"><p style="margin:0;max-width:760px;font-size:16px;line-height:1.55;text-wrap:pretty"><b style="font-weight:600">{{ fc.t }}.</b> {{ fc.d }}</p></sc-for>
+  </section>
+
+  <section id="ch-details" style="display:flex;flex-direction:column;gap:24px">
+    <h2 style="margin:0;font-size:clamp(26px,3.2vw,38px);font-weight:600;letter-spacing:-0.04em;line-height:1.05">More of the redesign.</h2>
+    <div style="columns:2 340px;column-gap:24px">
+      <sc-for list="{{ details }}" as="dt" hint-placeholder-count="5">
+        <figure style="margin:0 0 32px;break-inside:avoid;display:flex;flex-direction:column;gap:10px">{{ dt.img }}<figcaption style="font-size:14px;line-height:1.5;color:#525252"><b style="font-weight:600;color:#000000">{{ dt.t }}.</b> {{ dt.d }}</figcaption></figure>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="ch-outcome" style="display:flex;flex-direction:column;gap:24px">
+    <span style="font-size:13px;font-weight:600;color:#1E3FA8">05 · Outcome</span>
+    <h2 style="margin:0;font-size:clamp(30px,4vw,48px);font-weight:600;letter-spacing:-0.04em;line-height:1.05">One guided page.</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px">
+      <sc-for list="{{ outcomes }}" as="oc" hint-placeholder-count="3">
+        <div style="padding:24px;border-radius:14px;border:1px solid #EDEDED;display:flex;flex-direction:column;gap:8px"><span style="font-size:clamp(32px,4vw,44px);font-weight:600;letter-spacing:-0.04em;line-height:1;color:#1E3FA8">{{ oc.v }}</span><span style="font-size:14px;line-height:1.5;color:#525252">{{ oc.l }}</span></div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="ch-proto" style="display:flex;flex-direction:column;gap:20px">
+    <span style="font-size:13px;font-weight:600;color:#1E3FA8">06 · Prototype</span>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap"><h2 style="margin:0;font-size:clamp(30px,4vw,48px);font-weight:600;letter-spacing:-0.04em;line-height:1.05">Try it yourself.</h2><a href="https://baranwalsumit70-gif.github.io/ANGARA/" target="_blank" rel="noopener" style="height:40px;padding:0 18px;border-radius:999px;background:#1E3FA8;color:#FFFFFF;font-size:14px;font-weight:500;text-decoration:none;display:flex;align-items:center">Open full screen ↗</a></div>
+    <sc-if value="{{ protoWide }}" hint-placeholder-val="{{ true }}">
+      <div style="position:relative;left:50%;transform:translateX(-50%);width:min(1440px, calc(100vw - 24px));border-radius:16px;background:#F5F5F5;padding:clamp(8px,1.2vw,14px);box-sizing:border-box">
+        <div onMouseLeave="{{ protoSleep }}" style="position:relative;width:100%;aspect-ratio:1400/1000;border-radius:10px;overflow:hidden;background:#FFFFFF"><iframe src="https://baranwalsumit70-gif.github.io/ANGARA/" title="Angara prototype" loading="lazy" allow="fullscreen" style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe>
+          <sc-if value="{{ protoIdle }}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{ protoWake }}" aria-label="Interact with the prototype" style="position:absolute;inset:0;border:0;padding:0 0 28px;background:transparent;cursor:pointer;display:flex;align-items:flex-end;justify-content:center"><span style="height:40px;padding:0 18px;border-radius:999px;background:#000000;color:#FFFFFF;font-family:inherit;font-size:14px;font-weight:500;display:flex;align-items:center">Click to interact</span></button></sc-if>
+        </div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ protoNarrow }}" hint-placeholder-val="{{ false }}">
+      <div style="border-radius:16px;background:#000000;color:#FFFFFF;padding:24px;display:flex;flex-direction:column;gap:16px"><span style="font-size:15px;line-height:1.5">The prototype is built for desktop. Open it in a new tab to try the full flow.</span><a href="https://baranwalsumit70-gif.github.io/ANGARA/" target="_blank" rel="noopener" style="height:44px;width:max-content;padding:0 20px;border-radius:999px;background:#1E3FA8;color:#FFFFFF;font-size:14px;font-weight:500;text-decoration:none;display:flex;align-items:center">Open prototype ↗</a></div>
+    </sc-if>
+  </section>
+
+  <section id="ch-learn" style="display:flex;flex-direction:column;gap:20px">
+    <span style="font-size:13px;font-weight:600;color:#1E3FA8">07 · Learnings</span>
+    <h2 style="margin:0;font-size:clamp(30px,4vw,48px);font-weight:600;letter-spacing:-0.04em;line-height:1.05">What I learned.</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px">
+      <sc-for list="{{ learns }}" as="ln" hint-placeholder-count="3">
+        <div style="padding:22px;border-radius:14px;border:1px solid #EDEDED;display:flex;flex-direction:column;gap:10px"><span style="font-size:12px;font-weight:600;color:#1E3FA8">{{ ln.n }}</span><b style="font-size:18px;letter-spacing:-0.02em">{{ ln.t }}</b><span style="font-size:14px;line-height:1.5;color:#525252">{{ ln.d }}</span></div>
+      </sc-for>
+    </div>
+    <span style="font-size:13px;color:#737373">Design assignment. Outcomes not measured.</span>
+  </section>
+
+  <a href="Ferry ERP Case Study UX4G.dc.html" style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:28px 0;border-top:1px solid #EDEDED;text-decoration:none"><span style="display:flex;flex-direction:column;gap:4px"><span style="font-size:13px;color:#737373">Next project</span><span style="font-size:clamp(22px,3vw,32px);font-weight:600;letter-spacing:-0.03em">Brahmaputra Ferry ERP</span></span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a>
+</main>
+
+<a href="Portfolio v2.dc.html?chat=1" aria-label="Ask Sumit anything" title="Ask Sumit anything" style="position:fixed;right:20px;bottom:20px;z-index:50;width:44px;height:44px;box-sizing:border-box;padding:0;border:1px solid #E5E5E5;border-radius:50%;background:#FFFFFF;color:#000000;box-shadow:0 8px 24px -12px rgb(0 0 0 / .35);display:flex;align-items:center;justify-content:center;text-decoration:none"><span style="width:100%;height:100%;border-radius:50%;display:flex;align-items:center;justify-content:center" style-hover="animation:sumoSway .9s ease-in-out infinite"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="overflow:visible"><circle cx="12" cy="4.2" r="2.2" fill="currentColor" stroke="none"></circle><circle cx="12" cy="14" r="7.5"></circle><path d="M9 13.2h.01"></path><path d="M15 13.2h.01"></path><path d="M9.5 16.2c1.4 1.4 3.6 1.4 5 0"></path></svg></span></a>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { prob: 0, fix: 0, active: -1, rp: 0, narrow: false, protoLive: false };
+  CH = [["Brief", "brief"], ["Problems", "problems"], ["Insight", "insight"], ["Fixes", "fixes"], ["Outcome", "outcome"], ["Prototype", "proto"], ["Learnings", "learn"]];
+  PROBLEMS = [
+    ["Quality shown two ways", "Lab-grown and natural sit in the same row as good, better, best and heirloom. Buyers can't tell if these are one choice or two.", "Existing: gemstone quality control (crop, 2x)"],
+    ["Selection by colour alone", "A selected carat or metal is shown only by a thin border. Low-vision and colour-blind shoppers can miss it.", "Existing: carat and metal options (crop, 2x)"],
+    ["Price shown twice", "The same price appears at the top and on the add to bag bar, with a vague Change link and a New badge adding noise.", "Existing: price block + add to bag (crop, 2x)"],
+    ["Trust sits too low", "Reviews and proposal stories are far down the page, where few buyers reach them before deciding.", "Existing: title area with no reviews (crop, 2x)"],
+    ["Engraving and gifting are flat", "Engraving is plain text only, and the free gift and packaging are easy to miss.", "Existing: engraving + gift section (crop, 2x)"],
+    ["A crowded gallery", "Four images, a hand slider and a video sit in one grid, so no single view of the ring stands out.", ""]
+  ];
+  OLD = ["gap-quality", "gap-select", "gap-price", "gap-trust", "gap-pack", "old-gallery"];
+  NEW = ["new-gemstone", "new-steps", "new-addtobag", "new-title", "new-engraving", "new-gallery"];
+  FIXES = [
+    ["Origin and grade", "Origin and quality grade become two separate cards, each with its price, so the buyer makes one decision at a time."],
+    ["Clear selection", "Every selected option gets a check mark and a bold border, so the state never depends on colour."],
+    ["One price", "A single price in a sticky summary updates with every choice, so the final number is never a surprise."],
+    ["Trust up front", "A rating and review count sit next to the title, with four badges for returns, certification, resizing and sourcing."],
+    ["Engraving and gifts", "Engraving adds symbols and a date with a live preview, and packaging comes in three tiers with the free gift visible."],
+    ["One clear gallery", "A single large image with arrows, a counter and thumbnails, plus skin-tone previews on the hand shot."]
+  ];
+  componentDidMount() {
+    this._onScroll = () => { if (this._raf) return; this._raf = requestAnimationFrame(() => { this._raf = 0; let a = -1; this.CH.forEach(([, id], i) => { const el = document.getElementById("ch-" + id); if (el && el.getBoundingClientRect().top < 160) a = i; }); const d = document.documentElement, m = d.scrollHeight - d.clientHeight, p = m > 0 ? Math.round(d.scrollTop / m * 1000) / 10 : 0; if (a !== this.state.active || p !== this.state.rp) this.setState({ active: a, rp: p }); }); };
+    this._onResize = () => { const n = window.innerWidth < 720; if (n !== this.state.narrow) this.setState({ narrow: n }); };
+    window.addEventListener("scroll", this._onScroll, { passive: true }); window.addEventListener("resize", this._onResize); this._onResize(); this._onScroll();
+    this._io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = 1; e.target.style.transform = "none"; this._io.unobserve(e.target); } }), { threshold: 0.06 });
+    document.querySelectorAll("main > section").forEach(el => { el.style.scrollMarginTop = "72px"; el.style.opacity = 0; el.style.transform = "translateY(24px)"; el.style.transition = "opacity .7s ease, transform .7s ease"; this._io.observe(el); });
+  }
+  componentWillUnmount() { this._io && this._io.disconnect(); window.removeEventListener("scroll", this._onScroll); window.removeEventListener("resize", this._onResize); }
+  scrollTo(id) {
+    const el = document.getElementById(id); if (!el) return;
+    el.style.opacity = 1; el.style.transform = "none";
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 72, behavior: "smooth" });
+  }
+  im(src, alt, disp, lazy) {
+    return React.createElement("img", { src, alt, decoding: "async", loading: lazy ? "lazy" : undefined, style: disp == null ? { display: "block", width: "100%", height: "auto" } : { display: disp, position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "contain" } });
+  }
+  renderVals() {
+    const s = this.state, f = this.FIXES[s.fix];
+    return {
+      chapters: this.CH.map(([t, id], i) => ({ t, href: "#ch-" + id, bg: s.active === i ? "#E9EDFA" : "transparent", fg: s.active === i ? "#1E3FA8" : "#737373" })),
+      readPct: s.rp + "%",
+      metaChips: [["Role", "UX designer"], ["Type", "Design assignment"], ["Platform", "Desktop + mobile"], ["Year", "2026"]].map(([k, v]) => ({ k, v })),
+      stats: [["25–65", "US shoppers, men and women in a similar ratio"], ["80%", "of the jewellery purchase journey happens online"], ["4 goals", "More conversions and engagement, lower bounce, higher satisfaction"]].map(([v, l]) => ({ v, l })),
+      problems: this.PROBLEMS.map(([t, d, ph], i) => { const on = s.prob === i; return { n: String(i + 1).padStart(2, "0"), t, d, ph, srcImg: this.im("assets/ang/" + this.OLD[i] + ".png", t, on ? "block" : "none"), on, sel: String(on), disp: on ? "block" : "none", nc: on ? "#1E3FA8" : "#A1A1A1", tc: on ? "#000000" : "#737373", pick: () => this.setState({ prob: i }), toFix: e => { e.preventDefault(); this.setState({ fix: i }); this.scrollTo("ch-fixes"); } }; }),
+      fixAll: this.FIXES.map(([t], i) => { const d = s.fix === i ? "block" : "none"; return { beforeImg: this.im("assets/ang/" + this.OLD[i] + ".png", "Before: " + t, d), afterImg: this.im("assets/ang/" + this.NEW[i] + ".png", "After: " + t, d) }; }),
+      details: [["new-skintone", "Skin-tone preview", "Shoppers see the ring on four skin tones."], ["new-reviews", "Real reviews", "Proposal stories with names, written by buyers."], ["new-gifting", "Presentation and gifting", "Three packaging tiers and the free earrings, shown up front."], ["new-details", "Product details", "A short description and a clean spec table with the certificate."], ["new-change-gem", "Change gemstone", "Swap the centre stone while setting, carat and metal stay the same."], ["new-engraving-closed", "Engraving, collapsed", "Optional, so it stays out of the way until wanted."], ["new-sticky", "Sticky summary", "Every choice and the final price, always in view."]].map(([f, t, d]) => ({ img: this.im("assets/ang/" + f + ".png", t, null, true), t, d })),
+      outcomes: [["1 price", "One price, kept current by a sticky summary"], ["4 steps", "Gemstone, carat, metal and size in a fixed order"], ["3 tiers", "Packaging from a free box to a keepsake chest"]].map(([v, l]) => ({ v, l })),
+      goProto: e => { e.preventDefault(); this.scrollTo("ch-proto"); },
+      fixTabs: this.FIXES.map(([t], i) => { const on = s.fix === i; return { t, n: String(i + 1).padStart(2, "0"), sel: String(on), bg: on ? "#000000" : "#FFFFFF", fg: on ? "#FFFFFF" : "#000000", bd: on ? "#000000" : "#E5E5E5", pick: () => this.setState({ fix: i }) }; }),
+      fixCur: [{ t: f[0], d: f[1], before: "ang-before-" + (s.fix + 1), after: "ang-after-" + (s.fix + 1), bPh: "Before: " + this.PROBLEMS[s.fix][0].toLowerCase() + " (2x)", aPh: "After: " + f[0].toLowerCase() + " (2x)" }],
+      protoWide: !s.narrow, protoNarrow: s.narrow, protoIdle: !s.protoLive,
+      protoWake: () => this.setState({ protoLive: true }), protoSleep: () => this.setState({ protoLive: false }),
+      learns: [["Small fixes, big clarity", "Splitting origin from grade and adding check marks did more than any new feature."], ["Trust comes first", "For an expensive, emotional purchase, reviews and guarantees belong next to the price."], ["Design for gifting", "Many buyers shop for someone else, so engraving and packaging became part of the flow."]].map(([t, d], i) => ({ n: "0" + (i + 1), t, d }))
+    };
+  }
+}
+</script>
+</body>
+</html>
