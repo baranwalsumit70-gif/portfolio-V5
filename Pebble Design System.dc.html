@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap">
+  <style>*{box-sizing:border-box}</style>
+</helmet>
+<div style="font-family:Poppins,system-ui,sans-serif;color:#000000;display:flex;flex-direction:column;gap:40px;padding:clamp(20px,3vw,40px);border-radius:28px;border:1px solid #EDEDED;background:#FFFFFF">
+
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <span style="font-size:13px;font-weight:600;letter-spacing:.06em;color:#986312">COLOUR</span>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px"><sc-for list="{{ colors }}" as="c" hint-placeholder-count="10"><div style="display:flex;flex-direction:column;gap:8px"><span style="height:72px;border-radius:14px;background:{{ c.v }};border:1px solid #E5E5E5"></span><span style="display:flex;flex-direction:column;gap:0;font-size:13px;line-height:1.4"><b style="font-weight:500">{{ c.n }}</b><span style="color:#4B4B4B">{{ c.v }} · {{ c.u }}</span></span></div></sc-for></div>
+    <div style="display:flex;flex-direction:column;gap:8px;max-width:520px"><span style="font-size:13px;font-weight:500">Repair ramp: the missed day moves from red to green as a new streak is built</span><div style="display:flex;gap:6px"><sc-for list="{{ ramp }}" as="r" hint-placeholder-count="6"><span style="flex:1;height:36px;border-radius:8px;background:{{ r }}"></span></sc-for></div></div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <span style="font-size:13px;font-weight:600;letter-spacing:.06em;color:#986312">TYPE · POPPINS</span>
+    <div style="display:flex;flex-direction:column;border-top:1px solid #EDEDED">
+      <div style="display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;padding:14px 0;border-bottom:1px solid #EDEDED"><span style="width:150px;font-size:12px;color:#4B4B4B">Display · 28 / Medium</span><span style="font-size:28px;font-weight:500;color:#986312">Habit Personality</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;padding:14px 0;border-bottom:1px solid #EDEDED"><span style="width:150px;font-size:12px;color:#4B4B4B">Title · 22 / Medium</span><span style="font-size:22px;font-weight:500;color:#986312">Today's Habits</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;padding:14px 0;border-bottom:1px solid #EDEDED"><span style="width:150px;font-size:12px;color:#4B4B4B">Question · 18 / Regular</span><span style="font-size:18px">What's your main goal ?</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;padding:14px 0;border-bottom:1px solid #EDEDED"><span style="width:150px;font-size:12px;color:#4B4B4B">Body · 14 / Regular</span><span style="font-size:14px">Daily Reading</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;padding:14px 0;border-bottom:1px solid #EDEDED"><span style="width:150px;font-size:12px;color:#4B4B4B">Caption · 12 / Light</span><span style="font-size:12px;font-weight:300;color:#4B4B4B">I'll build a habit journey that's made just for you.</span></div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <span style="font-size:13px;font-weight:600;letter-spacing:.06em;color:#986312">COMPONENTS</span>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px">
+      <div style="padding:20px;border-radius:18px;background:#FAF7F3;display:flex;flex-direction:column;gap:12px"><span style="font-size:12px;color:#4B4B4B">Primary button · radius 14</span><span style="height:52px;border-radius:14px;background:#986312;color:#FFFFFF;font-size:17px;font-weight:500;display:flex;align-items:center;justify-content:center">Lets Start</span></div>
+      <div style="padding:20px;border-radius:18px;background:#FAF7F3;display:flex;flex-direction:column;gap:12px"><span style="font-size:12px;color:#4B4B4B">Option pill · default and selected</span><div style="display:flex;gap:10px"><span style="flex:1;height:52px;border-radius:999px;border:1px solid #D3D3D3;background:#FFFFFF;font-size:14px;display:flex;align-items:center;justify-content:center">Fitness</span><span style="flex:1;height:52px;border-radius:999px;background:#986312;color:#FFFFFF;font-size:14px;display:flex;align-items:center;justify-content:center">Learning</span></div></div>
+      <div style="padding:20px;border-radius:18px;background:#FAF7F3;display:flex;flex-direction:column;gap:12px"><span style="font-size:12px;color:#4B4B4B">Day chip · radius 8</span><div style="display:flex;gap:6px"><span style="width:48px;height:54px;border-radius:8px;border:1px solid #E5E5E5;background:#FFFFFF;font-size:13px;line-height:1.3;display:flex;flex-direction:column;align-items:center;justify-content:center"><span>Wed</span><span>28</span></span><span style="width:48px;height:54px;border-radius:8px;background:#986312;color:#FFFFFF;font-size:13px;line-height:1.3;display:flex;flex-direction:column;align-items:center;justify-content:center"><span>Thu</span><span>29</span></span><span style="width:48px;height:54px;border-radius:8px;border:1px solid #E5E5E5;background:#FFFFFF;font-size:13px;line-height:1.3;display:flex;flex-direction:column;align-items:center;justify-content:center"><span>Fri</span><span>30</span></span></div></div>
+      <div style="padding:20px;border-radius:18px;background:#FAF7F3;display:flex;flex-direction:column;gap:12px"><span style="font-size:12px;color:#4B4B4B">Habit row</span><div style="display:flex;align-items:center;gap:14px;padding:10px;border-radius:12px;background:#FFFFFF"><img src="assets/pebble/m-read.png" alt="" style="width:54px;height:auto"><span style="flex:1;display:flex;flex-direction:column;gap:6px"><span style="display:flex;justify-content:space-between;font-size:14px"><span>Daily Reading</span><span style="font-size:12px;color:#4B4B4B">30%</span></span><span style="height:5px;border-radius:999px;background:#EFE7DD"><span style="display:block;width:30%;height:100%;border-radius:999px;background:#986312"></span></span><span style="font-size:12px;color:#6B6B6B">Reach a 3 day streak</span></span></div></div>
+      <div style="padding:20px;border-radius:18px;background:#FAF7F3;display:flex;flex-direction:column;gap:12px"><span style="font-size:12px;color:#4B4B4B">Streak card states</span><div style="display:flex;gap:14px;flex-wrap:wrap"><sc-for list="{{ states }}" as="s" hint-placeholder-count="4"><span style="display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px;color:#4B4B4B"><span style="width:36px;height:36px;border-radius:50%;background:{{ s.bg }};border:{{ s.bd }};color:{{ s.fg }};font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center">{{ s.m }}</span>{{ s.t }}</span></sc-for></div></div>
+      <div style="padding:20px;border-radius:18px;background:#FAF7F3;display:flex;flex-direction:column;gap:12px"><span style="font-size:12px;color:#4B4B4B">Text field · pill</span><span style="height:46px;padding:0 20px;border-radius:999px;border:1px solid #D3D3D3;background:#FFFFFF;font-size:14px;color:#767676;display:flex;align-items:center">Book Reading</span></div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <span style="font-size:13px;font-weight:600;letter-spacing:.06em;color:#986312">MASCOT · ONE POSE PER CONTEXT</span>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:12px"><sc-for list="{{ mascots }}" as="m" hint-placeholder-count="10"><div style="display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center"><img src="{{ m.src }}" alt="{{ m.t }}" style="width:84px;height:auto"><span style="font-size:12px;color:#4B4B4B">{{ m.t }}</span></div></sc-for></div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      colors: [["Brand", "#986312", "buttons, headings"], ["Cream", "#F5EEE6", "backgrounds"], ["Text", "#000000", "body"], ["Secondary", "#4B4B4B", "labels"], ["Muted", "#6B6B6B", "hints"], ["Border", "#D3D3D3", "fields, pills"], ["Track", "#EFE7DD", "progress"], ["Success", "#17792F", "done"], ["Missed", "#D21F26", "broken day"], ["Punished", "#858585", "lost days"]].map(([n, v, u]) => ({ n, v, u })),
+      ramp: ["#D21F26", "#F2643F", "#F5992F", "#E9D21E", "#A5DB3A", "#17792F"],
+      states: [["Done", "#17792F", "0", "#FFFFFF", "✓"], ["Missed", "#D21F26", "0", "#FFFFFF", "✕"], ["Punished", "#858585", "0", "#FFFFFF", "✓"], ["Upcoming", "#FFFFFF", "1.5px solid #949494", "#949494", "✓"]].map(([t, bg, bd, fg, m]) => ({ t, bg, bd, fg, m })),
+      mascots: [["Welcome", "m-hi"], ["Onboarding", "m-wave"], ["Question", "m-ask"], ["Repair", "m-repair"], ["Punishment", "m-punish"], ["Home", "m-desk"], ["Reading", "m-read"], ["Yoga", "m-calm"], ["Jogging", "m-run"], ["Rope skipping", "m-rope"], ["Gardening", "m-garden"], ["New habit", "m-water"]].map(([t, f]) => ({ t, src: "assets/pebble/" + f + ".png" }))
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>@keyframes sumoSway{0%,100%{transform:translateX(0) rotate(0)}25%{transform:translateX(-3px) rotate(-8deg)}75%{transform:translateX(3px) rotate(8deg)}}</style>
+  <script src="music-box.js"></script>
+  <link rel="stylesheet" href="_ds/shadcn-ui-design-system-78dd7306-68f4-4f3d-a1b1-8768c357041b/styles.css">
+  <script src="image-slot.js"></script>
+  <style>html,body{margin:0;background:#FFFFFF;color:#000000;font-family:var(--font-sans);-webkit-font-smoothing:antialiased}a{color:inherit}a:hover{opacity:.7}
+  @keyframes pulseRing{0%{transform:scale(1);opacity:.5}100%{transform:scale(1.6);opacity:0}}
+  @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}</style>
+</helmet>
+<div style="position:sticky;top:0;z-index:10;background:rgb(255 255 255 / .92);backdrop-filter:blur(8px);border-bottom:1px solid #EDEDED">
+  <div style="max-width:1120px;margin:0 auto;padding:0 clamp(20px,4vw,48px);height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px">
+    <a href="Portfolio v2.dc.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;font-size:14px;font-weight:500;flex:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>Portfolio</a>
+    <div style="display:flex;gap:4px;overflow-x:auto;font-size:13px;scrollbar-width:none"><sc-for list="{{ chapters }}" as="ch" hint-placeholder-count="7"><a href="{{ ch.href }}" style="text-decoration:none;white-space:nowrap;height:30px;padding:0 10px;border-radius:999px;display:flex;align-items:center;background:{{ ch.bg }};color:{{ ch.fg }};transition:background .15s, color .15s" style-hover="background:#E8F6F1;color:#16A37A;opacity:1">{{ ch.t }}</a></sc-for></div>
+  </div>
+  <div style="height:2px;width:{{ readPct }};background:#16A37A;transition:width .1s linear"></div>
+</div>
+
+<main style="max-width:1120px;margin:0 auto;padding:0 clamp(20px,4vw,48px) 96px;display:flex;flex-direction:column;gap:clamp(88px,13vh,140px)">
+
+  <header style="display:flex;flex-direction:column;gap:24px;padding-top:clamp(56px,10vh,112px)">
+    <h1 style="margin:0;font-size:clamp(48px,8vw,96px);font-weight:600;letter-spacing:-0.05em;line-height:.92">Tvarah Pulse</h1>
+    <p style="margin:0;max-width:640px;font-size:clamp(18px,2vw,22px);line-height:1.45;color:#000000;text-wrap:pretty">An AI hiring workspace for recruitment agencies. I designed it end to end, from recruiter research to a working prototype.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ metaChips }}" as="m" hint-placeholder-count="4"><span style="flex:none;white-space:nowrap;height:32px;padding:0 14px;border-radius:999px;border:1px solid #E5E5E5;display:flex;align-items:center;gap:6px;font-size:13px;transition:border-color .15s" style-hover="border-color:#000000"><b style="font-weight:600">{{ m.k }}</b><span style="color:#737373">{{ m.v }}</span></span></sc-for></div>
+    <a href="#ch-proto" onClick="{{ goProto }}" style="height:44px;width:max-content;flex:none;align-self:flex-start;white-space:nowrap;padding:0 20px;border-radius:999px;background:#16A37A;color:#FFFFFF;font-size:14px;font-weight:500;text-decoration:none;display:flex;align-items:center;gap:8px"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 3.5v17a1 1 0 0 0 1.5.86l14-8.5a1 1 0 0 0 0-1.72l-14-8.5A1 1 0 0 0 6 3.5Z"></path></svg>Try the prototype</a>
+    <div style="position:relative;width:100%;aspect-ratio:2284/1624;margin-top:16px"><image-slot id="hr2-hero" src="assets/hr-hero-dashboard.png" shape="rounded" radius="14" fit="contain" placeholder="Hero: dashboard screenshot (16:10)"></image-slot></div>
+  </header>
+
+  <section id="ch-problem" style="display:flex;flex-direction:column;gap:24px">
+    <span style="font-size:13px;font-weight:600;color:#16A37A">01 · Problem</span>
+    <h2 style="margin:0;font-size:clamp(30px,4vw,48px);font-weight:600;letter-spacing:-0.04em;line-height:1.05">1 hire, 5 places.</h2>
+    <p style="margin:0;max-width:680px;font-size:clamp(16px,1.6vw,18px);line-height:1.55;color:#000000;text-wrap:pretty">Agency recruiters run every hire across spreadsheets, job portals, email, chat and notes. Nothing is connected, so checking one candidate can take most of the day.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:stretch">
+      <div style="position:relative;flex:2 1 460px;min-width:0;min-height:360px;border-radius:16px;background:#FAFAFA;border:1px solid #EDEDED;overflow:hidden">
+        <svg viewBox="0 0 720 400" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%" fill="none" stroke-width="1.5"><sc-for list="{{ tools }}" as="t" hint-placeholder-count="5"><line x1="{{ t.cx }}" y1="{{ t.cy }}" x2="360" y2="200" stroke="{{ t.line }}" stroke-dasharray="{{ t.dash }}" style="transition:stroke .2s"></line></sc-for></svg>
+        <sc-for list="{{ tools }}" as="t" hint-placeholder-count="5"><button type="button" onMouseEnter="{{ t.enter }}" onMouseLeave="{{ t.leave }}" onClick="{{ t.enter }}" style="position:absolute;left:{{ t.l }};top:{{ t.t }};transform:translate(-50%,-50%);height:36px;padding:0 16px;border-radius:999px;border:1px solid {{ t.bd }};background:{{ t.bg }};color:{{ t.fg }};display:flex;align-items:center;font-family:inherit;font-size:14px;font-weight:500;white-space:nowrap;cursor:pointer;transition:all .2s">{{ t.n }}</button></sc-for>
+        <button type="button" onClick="{{ pvTap }}" onMouseEnter="{{ pvIn }}" onMouseLeave="{{ pvOut }}" onFocus="{{ pvIn }}" onBlur="{{ pvOut }}" aria-label="Open recruiter persona" style="position:absolute;left:50%;top:50%;margin:calc(clamp(96px,15vw,128px) / -2) 0 0 calc(clamp(96px,15vw,128px) / -2);width:clamp(96px,15vw,128px);aspect-ratio:1;border:0;padding:0;border-radius:50%;background:transparent;cursor:pointer;animation:{{ pvFloat }}">
+          <span style="position:absolute;inset:0;border-radius:50%;border:2px solid #16A37A;opacity:{{ pvRingOp }};animation:{{ pvRing }}"></span>
+          <span style="position:absolute;inset:0;border-radius:50%;overflow:hidden;background:#000000;box-shadow:0 0 0 4px #FFFFFF"><svg viewBox="0 0 120 120" width="100%" height="100%" style="position:absolute;inset:0;display:block" aria-hidden="true">
+<rect width="120" height="120" fill="#EEF0F2"></rect>
+<g style="transform:{{ pvBody }};transform-origin:60px 120px;transition:transform .5s cubic-bezier(.3,1.6,.5,1)">
+<path d="M16 120c3-20 18-30 44-30s41 10 44 30Z" fill="#1F2933"></path>
+<path d="M50 90l10 16 10-16Z" fill="#FFFFFF"></path><path d="M58 94h4l1 14h-6Z" fill="#B91C1C"></path>
+<path d="M44 92l-6 28M76 92l6 28" stroke="#000000" stroke-width="2"></path>
+<rect x="76" y="104" width="12" height="9" rx="2" fill="#FFFFFF" stroke="#000000" stroke-width="1.2"></rect>
+<rect x="53" y="76" width="14" height="16" rx="4" fill="#A9714B"></rect>
+<g style="transform:{{ pvHead }};transform-origin:60px 80px;transition:transform .5s cubic-bezier(.3,1.6,.5,1)">
+<ellipse cx="60" cy="54" rx="22" ry="25" fill="#BC825A"></ellipse>
+<ellipse cx="38" cy="56" rx="4" ry="6" fill="#A9714B"></ellipse><ellipse cx="82" cy="56" rx="4" ry="6" fill="#A9714B"></ellipse>
+<path d="M38 50c-3-17 8-27 23-27 14 0 24 9 21 25-2-7-7-10-12-11-6 5-20 5-27 1-2 4-4 8-5 12Z" fill="#1A1A1A"></path>
+<path d="M39 46c0-5 2-9 4-11M81 46c0-5-1-8-3-10" stroke="#B5B5B5" stroke-width="3" fill="none" stroke-linecap="round"></path>
+<path d="M45 44l9-2M66 42l9 2" stroke="#1A1A1A" stroke-width="2.4" stroke-linecap="round" style="transform:{{ pvBrow }};transition:transform .3s"></path>
+<g style="transform:{{ pvEye }};transform-origin:60px 53px;transition:transform .12s"><ellipse cx="50" cy="53" rx="2.4" ry="2.8" fill="#000000"></ellipse><ellipse cx="70" cy="53" rx="2.4" ry="2.8" fill="#000000"></ellipse></g>
+<path d="M58 57c1 4 3 5 5 4" stroke="#8C5A3A" stroke-width="1.8" fill="none" stroke-linecap="round"></path>
+<path d="M50 65c3-2 7-2 10-1 3-1 7-1 10 1-3 2-7 2-10 1-3 1-7 1-10-1Z" fill="#2B2B2B"></path>
+<path d="{{ pvMouth }}" stroke="#5A2E1A" stroke-width="2.2" fill="{{ pvMouthFill }}" stroke-linecap="round"></path>
+<path d="M34 54c0-16 11-26 26-26s26 10 26 26" stroke="#000000" stroke-width="3" fill="none"></path>
+<rect x="30" y="50" width="7" height="12" rx="3" fill="#000000"></rect>
+<path d="M33 62c0 8 6 12 14 12" stroke="#000000" stroke-width="2" fill="none" stroke-linecap="round"></path><circle cx="48" cy="74" r="2.2" fill="#000000"></circle>
+</g>
+<g style="transform:{{ pvHand }};transform-origin:96px 112px;transition:transform .45s cubic-bezier(.3,1.6,.5,1);opacity:{{ pvHandOp }}"><path d="M92 120l4-22" stroke="#1F2933" stroke-width="9" stroke-linecap="round"></path><circle cx="97" cy="94" r="7" fill="#BC825A"></circle><path d="M93 89v-7M97 88v-8M101 89v-7" stroke="#BC825A" stroke-width="3.2" stroke-linecap="round"></path></g>
+</g>
+</svg></span>
+          <span style="position:absolute;left:50%;bottom:-30px;transform:translateX(-50%);height:24px;padding:0 10px;border-radius:999px;background:#000000;color:#FFFFFF;font-size:11px;font-weight:600;display:flex;align-items:center;white-space:nowrap;opacity:{{ pvLabelOp }};transition:opacity .2s;pointer-events:none">{{ pvLabel }}</span>
+        </button>
+        <span style="position:absolute;left:16px;bottom:14px;right:16px;font-size:13px;color:#525252;min-height:18px">{{ toolNote }}</span>
+      </div>
+      <div style="flex:1 1 260px;min-width:0;border-radius:16px;border:1px solid {{ personaBd }};padding:22px;display:flex;flex-direction:column;gap:16px;background:#FFFFFF;transition:border-color .2s">
+        <div style="display:flex;align-items:center;gap:12px"><span style="position:relative;width:48px;height:48px;flex:none;border-radius:50%;overflow:hidden;background:#F5F5F5"><svg viewBox="0 0 120 120" width="100%" height="100%" style="position:absolute;inset:0;display:block" aria-hidden="true">
+<rect width="120" height="120" fill="#EEF0F2"></rect>
+<g>
+<path d="M16 120c3-20 18-30 44-30s41 10 44 30Z" fill="#1F2933"></path>
+<path d="M50 90l10 16 10-16Z" fill="#FFFFFF"></path><path d="M58 94h4l1 14h-6Z" fill="#B91C1C"></path>
+<path d="M44 92l-6 28M76 92l6 28" stroke="#000000" stroke-width="2"></path>
+<rect x="76" y="104" width="12" height="9" rx="2" fill="#FFFFFF" stroke="#000000" stroke-width="1.2"></rect>
+<rect x="53" y="76" width="14" height="16" rx="4" fill="#A9714B"></rect>
+<g>
+<ellipse cx="60" cy="54" rx="22" ry="25" fill="#BC825A"></ellipse>
+<ellipse cx="38" cy="56" rx="4" ry="6" fill="#A9714B"></ellipse><ellipse cx="82" cy="56" rx="4" ry="6" fill="#A9714B"></ellipse>
+<path d="M38 50c-3-17 8-27 23-27 14 0 24 9 21 25-2-7-7-10-12-11-6 5-20 5-27 1-2 4-4 8-5 12Z" fill="#1A1A1A"></path>
+<path d="M39 46c0-5 2-9 4-11M81 46c0-5-1-8-3-10" stroke="#B5B5B5" stroke-width="3" fill="none" stroke-linecap="round"></path>
+<path d="M45 44l9-2M66 42l9 2" stroke="#1A1A1A" stroke-width="2.4" stroke-linecap="round"></path>
+<g><ellipse cx="50" cy="53" rx="2.4" ry="2.8" fill="#000000"></ellipse><ellipse cx="70" cy="53" rx="2.4" ry="2.8" fill="#000000"></ellipse></g>
+<path d="M58 57c1 4 3 5 5 4" stroke="#8C5A3A" stroke-width="1.8" fill="none" stroke-linecap="round"></path>
+<path d="M50 65c3-2 7-2 10-1 3-1 7-1 10 1-3 2-7 2-10 1-3 1-7 1-10-1Z" fill="#2B2B2B"></path>
+<path d="M53 70c4 3 10 3 14 0" stroke="#5A2E1A" stroke-width="2.2" fill="none" stroke-linecap="round"></path>
+<path d="M34 54c0-16 11-26 26-26s26 10 26 26" stroke="#000000" stroke-width="3" fill="none"></path>
+<rect x="30" y="50" width="7" height="12" rx="3" fill="#000000"></rect>
+<path d="M33 62c0 8 6 12 14 12" stroke="#000000" stroke-width="2" fill="none" stroke-linecap="round"></path><circle cx="48" cy="74" r="2.2" fill="#000000"></circle>
+</g>
+
+</g>
+</svg></span><span style="flex:1;min-width:0;display:flex;flex-direction:column"><b style="font-size:16px">Sandeep Guduru</b><span style="font-size:12px;color:#737373">IT recruiter · 40 · 12 yrs · agency</span></span></div>
+        <div style="display:flex;gap:6px"><sc-for list="{{ personaTabs }}" as="pt" hint-placeholder-count="2"><button type="button" onClick="{{ pt.go }}" style="height:28px;padding:0 12px;border-radius:999px;border:1px solid {{ pt.bd }};background:{{ pt.bg }};color:{{ pt.fg }};font-family:inherit;font-size:12px;font-weight:500;cursor:pointer">{{ pt.t }}</button></sc-for></div>
+        <div style="display:flex;flex-direction:column;gap:8px"><sc-for list="{{ personaItems }}" as="pi" hint-placeholder-count="3"><span style="display:flex;align-items:baseline;gap:10px;font-size:13px;line-height:1.4"><span style="width:6px;height:6px;flex:none;border-radius:50%;background:{{ pi.dot }};transform:translateY(-1px)"></span><span style="flex:1;min-width:0">{{ pi.t }}</span></span></sc-for></div>
+        <div style="margin-top:auto;padding:12px 14px;border-radius:10px;background:#F5F5F5;font-size:13px;line-height:1.45">“I spend more time checking resumes than talking to people.”</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px"><sc-for list="{{ probNums }}" as="n" hint-placeholder-count="3"><div style="padding:22px;border-radius:14px;background:#000000;color:#FFFFFF;display:flex;flex-direction:column;gap:6px;transition:transform .2s" style-hover="transform:translateY(-3px)"><b style="font-size:clamp(32px,4vw,44px);font-weight:600;letter-spacing:-0.045em;line-height:1">{{ n.v }}</b><span style="font-size:12px;color:#A1A1A1">{{ n.l }}</span></div></sc-for></div>
+  </section>
+
+  <section id="ch-research" style="display:flex;flex-direction:column;gap:24px">
+    <span style="font-size:13px;font-weight:600;color:#16A37A">02 · Research</span>
+    <h2 style="margin:0;font-size:clamp(30px,4vw,48px);font-weight:600;letter-spacing:-0.04em;line-height:1.05">What the market does.</h2>
+    <p style="margin:0;max-width:680px;font-size:clamp(16px,1.6vw,18px);line-height:1.55;color:#000000;text-wrap:pretty">I benchmarked 12 hiring products on positioning, AI features, trust signals and candidate flows, then scanned their interfaces for patterns worth reusing.</p>
+    <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap"><b style="font-size:clamp(56px,8vw,88px);font-weight:600;letter-spacing:-0.05em;line-height:1">12</b><span style="font-size:clamp(18px,2vw,22px);color:#737373">hiring products benchmarked</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px"><sc-for list="{{ products }}" as="p" hint-placeholder-count="12"><a href="{{ p.url }}" target="_blank" rel="noopener" title="{{ p.n }} ↗" style="height:56px;border-radius:10px;border:1px solid #EDEDED;display:flex;align-items:center;justify-content:center;gap:10px;font-size:15px;font-weight:600;letter-spacing:-0.01em;text-decoration:none;color:#000000;transition:border-color .15s, transform .15s" style-hover="border-color:#000000;transform:translateY(-2px);opacity:1"><img src="{{ p.logo }}" alt="" width="20" height="20" loading="lazy" style="width:20px;height:20px;border-radius:4px;filter:grayscale(1) contrast(1.2)">{{ p.n }}</a></sc-for></div>
+    <div style="border-radius:16px;border:1px solid #EDEDED;background:#F5F5F5;overflow:hidden;display:flex;flex-direction:column">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 12px;border-bottom:1px solid #EDEDED;background:#FFFFFF;flex-wrap:wrap">
+        <b style="font-size:13px">UI scan</b>
+        <div style="display:flex;align-items:center;gap:6px">
+          <button type="button" onClick="{{ pdfOut }}" aria-label="Zoom out" style="width:32px;height:32px;border-radius:8px;border:1px solid #E5E5E5;background:#FFFFFF;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center">−</button>
+          <span style="min-width:52px;text-align:center;font-size:12px;font-weight:600;font-variant-numeric:tabular-nums">{{ pdfPct }}</span>
+          <button type="button" onClick="{{ pdfIn }}" aria-label="Zoom in" style="width:32px;height:32px;border-radius:8px;border:0;background:#16A37A;color:#FFFFFF;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center">+</button>
+          <button type="button" onClick="{{ pdfFit }}" style="height:32px;padding:0 12px;border-radius:8px;border:1px solid #E5E5E5;background:#FFFFFF;cursor:pointer;font-family:inherit;font-size:12px">Fit</button>
+          <a href="assets/hr-ui-scan.pdf" target="_blank" rel="noopener" style="height:32px;padding:0 12px;border-radius:8px;border:1px solid #E5E5E5;display:flex;align-items:center;font-size:12px;text-decoration:none;white-space:nowrap">Open ↗</a>
+        </div>
+      </div>
+      <div ref="{{ pdfWrap }}" data-lenis-prevent="" style="height:min(78vh,720px);overflow:auto;padding:16px;box-sizing:border-box;cursor:grab">
+        <div ref="{{ pdfPages }}" style="display:flex;flex-direction:column;align-items:center;gap:16px;width:max-content;min-width:100%"></div>
+        <span style="display:{{ pdfLoadDisp }};font-size:13px;color:#737373;text-align:center;padding:40px 0">Loading UI scan…</span>
+      </div>
+    </div>
+
+  </section>
+
+  <section id="ch-insight" style="display:flex;flex-direction:column;gap:24px">
+    <span style="font-size:13px;font-weight:600;color:#16A37A">03 · Insight</span>
+    <p style="margin:0;font-size:clamp(28px,4vw,44px);font-weight:500;letter-spacing:-0.035em;line-height:1.25;text-wrap:balance">How might we help a recruiter go from <mark style="background:#F5F5F5;padding:0 8px;border-radius:8px">a pile of resumes</mark> to <mark style="background:#16A37A;color:#FFFFFF;padding:0 8px;border-radius:8px">a confident shortlist</mark> in minutes?</p>
+    <p style="margin:0;max-width:680px;font-size:clamp(16px,1.6vw,18px);line-height:1.55;color:#000000;text-wrap:pretty">Recruiters did not need more data. They needed a score they could trust and a clear next step.</p>
+  </section>
+
+  <section id="ch-flow" style="display:flex;flex-direction:column;gap:24px">
+    <span style="font-size:13px;font-weight:600;color:#16A37A">04 · Flow</span>
+    <h2 style="margin:0;font-size:clamp(30px,4vw,48px);font-weight:600;letter-spacing:-0.04em;line-height:1.05">Resume in, decision out.</h2>
+    <p style="margin:0;max-width:680px;font-size:clamp(16px,1.6vw,18px);line-height:1.55;color:#000000;text-wrap:pretty">Every resume follows the same six steps, from upload to a recruiter decision. Step through them below.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start">
+      <div style="flex:1 1 220px;min-width:0;display:flex;flex-direction:column;gap:2px">
+        <sc-for list="{{ journey }}" as="j" hint-placeholder-count="6"><button type="button" onClick="{{ j.go }}" style="display:flex;gap:12px;align-items:center;min-height:52px;padding:0 12px;border:0;border-radius:10px;background:{{ j.rowBg }};font-family:inherit;text-align:left;cursor:pointer;transition:background .2s" style-hover="background:#F5F5F5"><span style="width:28px;height:28px;flex:none;border-radius:50%;background:{{ j.bg }};color:{{ j.fg }};border:1px solid {{ j.bd }};font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;box-sizing:border-box;transition:all .2s">{{ j.mark }}</span><span style="font-size:14px;font-weight:{{ j.fw }};color:#000000">{{ j.t }}</span></button></sc-for>
+        <div style="display:flex;gap:8px;padding:12px 12px 0"><button type="button" onClick="{{ jPrev }}" style="height:34px;padding:0 14px;border-radius:8px;border:1px solid #E5E5E5;background:#FFFFFF;font-family:inherit;font-size:13px;cursor:pointer">Back</button><button type="button" onClick="{{ jNext }}" style="height:34px;padding:0 14px;border-radius:8px;border:0;background:#16A37A;color:#FFFFFF;font-family:inherit;font-size:13px;cursor:pointer">{{ jNextLabel }}</button></div>
+      </div>
+      <div style="flex:2 1 420px;min-width:0;min-height:380px;border-radius:16px;background:#F5F5F5;padding:clamp(14px,2.5vw,24px);display:flex;flex-direction:column;gap:14px;box-sizing:border-box">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px"><b style="font-size:15px">{{ jCur.t }}</b><span style="font-size:12px;color:#737373">{{ jCur.pos }}</span></div>
+        <sc-if value="{{ jUpload }}" hint-placeholder-val="{{ true }}"><div style="background:#FFFFFF;border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:12px;box-shadow:0 8px 24px -16px rgb(0 0 0 / .25)">
+          <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"><span style="display:flex;flex-direction:column"><b style="font-size:18px">Aarav Sharma</b><span style="font-size:12px;color:#737373">Senior React Developer · Bengaluru · 6 yrs</span></span><span style="height:24px;padding:0 10px;border-radius:999px;background:#F5F5F5;font-size:11px;display:flex;align-items:center;gap:6px">aarav_sharma_cv.pdf</span></div>
+          <sc-for list="{{ resumeExp }}" as="e" hint-placeholder-count="2"><div style="display:flex;flex-direction:column;gap:2px;padding-top:10px;border-top:1px solid #F0F0F0"><span style="display:flex;justify-content:space-between;gap:8px;font-size:13px"><b>{{ e.r }}</b><span style="color:#737373">{{ e.y }}</span></span><span style="font-size:12px;color:#525252">{{ e.c }} · {{ e.d }}</span></div></sc-for>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;padding-top:4px"><sc-for list="{{ resumeSkills }}" as="k" hint-placeholder-count="6"><span style="height:24px;padding:0 10px;border-radius:6px;background:#F5F5F5;font-size:12px;display:flex;align-items:center">{{ k }}</span></sc-for></div>
+        </div></sc-if>
+        <sc-if value="{{ jValidate }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFFFF;border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:10px"><sc-for list="{{ checks }}" as="c" hint-placeholder-count="4"><span style="display:flex;align-items:center;gap:10px;font-size:13px"><span style="width:20px;height:20px;border-radius:50%;background:#000000;color:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>{{ c }}</span></sc-for></div></sc-if>
+        <sc-if value="{{ jJD }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ jdTabs }}" as="d" hint-placeholder-count="3"><button type="button" onClick="{{ d.go }}" style="height:28px;padding:0 12px;border-radius:999px;border:1px solid {{ d.bd }};background:{{ d.bg }};color:{{ d.fg }};font-family:inherit;font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap">{{ d.t }}</button></sc-for></div>
+          <div style="background:#FFFFFF;border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:12px;box-shadow:0 8px 24px -16px rgb(0 0 0 / .25)">
+            <span style="display:flex;flex-direction:column"><b style="font-size:18px">{{ jd.t }}</b><span style="font-size:12px;color:#737373">{{ jd.m }}</span></span>
+            <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:11px;font-weight:600;color:#737373">Must have</span><span style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ jd.must }}" as="k" hint-placeholder-count="3"><span style="height:24px;padding:0 10px;border-radius:6px;background:#000000;color:#FFFFFF;font-size:12px;display:flex;align-items:center">{{ k }}</span></sc-for></span></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:11px;font-weight:600;color:#737373">Nice to have</span><span style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ jd.nice }}" as="k" hint-placeholder-count="2"><span style="height:24px;padding:0 10px;border-radius:6px;border:1px solid #E5E5E5;font-size:12px;display:flex;align-items:center">{{ k }}</span></sc-for></span></div>
+          </div></div></sc-if>
+        <sc-if value="{{ jParse }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFFFF;border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:10px"><sc-for list="{{ matchRows }}" as="k" hint-placeholder-count="5"><div style="display:grid;grid-template-columns:110px minmax(0,1fr) 40px;gap:10px;align-items:center;font-size:12px"><span>{{ k.t }}</span><span style="height:6px;border-radius:999px;background:#F0F0F0;overflow:hidden"><span style="display:block;height:100%;width:{{ k.w }};background:{{ k.c }};transition:width .6s"></span></span><b style="text-align:right">{{ k.v }}</b></div></sc-for></div></sc-if>
+        <sc-if value="{{ jInsight }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFFFF;border-radius:12px;padding:20px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:center">
+          <span style="position:relative;width:96px;height:96px"><svg width="96" height="96" viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="none" stroke="#F0F0F0" stroke-width="3.5"></circle><circle cx="18" cy="18" r="15" fill="none" stroke="#16A37A" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="{{ jd.dash }}" transform="rotate(-90 18 18)" style="transition:stroke-dasharray .6s"></circle></svg><b style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:26px">{{ jd.score }}</b></span>
+          <div style="display:flex;flex-direction:column;gap:8px"><sc-for list="{{ insightTags }}" as="g" hint-placeholder-count="3"><span style="display:flex;align-items:center;gap:8px;font-size:13px"><span style="width:8px;height:8px;flex:none;border-radius:50%;background:{{ g.dot }}"></span><b style="font-weight:600">{{ g.k }}</b><span style="color:#525252">{{ g.v }}</span></span></sc-for></div>
+        </div></sc-if>
+        <sc-if value="{{ jAct }}" hint-placeholder-val="{{ false }}"><div style="background:#FFFFFF;border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ acts }}" as="a" hint-placeholder-count="3"><button type="button" onClick="{{ a.go }}" style="height:38px;padding:0 16px;border-radius:8px;border:1px solid {{ a.bd }};background:{{ a.bg }};color:{{ a.fg }};font-family:inherit;font-size:13px;font-weight:500;cursor:pointer">{{ a.t }}</button></sc-for></div>
+          <span style="font-size:13px;color:#525252;min-height:18px">{{ actNote }}</span>
+        </div></sc-if>
+        <div style="margin-top:auto;height:4px;border-radius:999px;background:#E5E5E5;overflow:hidden"><span style="display:block;height:100%;width:{{ jPct }};background:#16A37A;transition:width .4s"></span></div>
+      </div>
+    </div>
+    <div style="width:100%;border-radius:14px;border:1px solid #EDEDED;background:#FFFFFF;padding:clamp(12px,2vw,20px);box-sizing:border-box;overflow-x:auto"><img src="assets/hr-journey-v3.png" alt="User journey: upload resume, file valid, JD provided, resume parsing, JD parsing, candidate insight dashboard, download report" style="display:block;width:100%;min-width:640px;height:auto"></div>
+    <div style="width:100%;border-radius:14px;border:1px solid #EDEDED;background:#FFFFFF;overflow:hidden;display:flex;flex-direction:column">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 12px;border-bottom:1px solid #EDEDED;flex-wrap:wrap">
+        <b style="font-size:13px">Detailed user flow</b>
+        <div style="display:flex;align-items:center;gap:6px">
+          <button type="button" onClick="{{ fzOut }}" aria-label="Zoom out" style="width:32px;height:32px;border-radius:8px;border:1px solid #E5E5E5;background:#FFFFFF;cursor:pointer;font-size:16px">−</button>
+          <span style="min-width:52px;text-align:center;font-size:12px;font-weight:600;font-variant-numeric:tabular-nums">{{ fzPct }}</span>
+          <button type="button" onClick="{{ fzIn }}" aria-label="Zoom in" style="width:32px;height:32px;border-radius:8px;border:0;background:#16A37A;color:#FFFFFF;cursor:pointer;font-size:16px">+</button>
+          <button type="button" onClick="{{ fzFit }}" style="height:32px;padding:0 12px;border-radius:8px;border:1px solid #E5E5E5;background:#FFFFFF;cursor:pointer;font-family:inherit;font-size:12px">Fit</button>
+        </div>
+      </div>
+      <div data-lenis-prevent="" style="height:{{ fzBoxH }};overflow:auto;padding:16px;box-sizing:border-box;background:#FAFAFA">
+        <img src="assets/hr-flow-v3.png" alt="Detailed user flow from the Tvarah website to resume parsing and the insight dashboard" decoding="async" style="display:block;width:{{ fzW }};max-width:none;height:auto;margin:0 auto;background:#FFFFFF;border-radius:8px;image-rendering:-webkit-optimize-contrast">
+      </div>
+    </div>
+  </section>
+
+  <section id="ch-design" style="display:flex;flex-direction:column;gap:20px">
+    <span style="font-size:13px;font-weight:600;color:#16A37A">05 · Design</span>
+    <h2 style="margin:0;font-size:clamp(30px,4vw,48px);font-weight:600;letter-spacing:-0.04em;line-height:1.05">8 modules, 1 workspace.</h2>
+    <p style="margin:0;max-width:680px;font-size:clamp(16px,1.6vw,18px);line-height:1.55;color:#000000;text-wrap:pretty">Each module answers one recruiter question. Pick a module to see the screen and the decisions behind it.</p>
+    <div style="position:relative;left:50%;transform:translateX(-50%);width:min(1440px, calc(100vw - 24px));border-radius:16px;background:#F5F5F5;padding:clamp(8px,1.2vw,14px);box-sizing:border-box;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;gap:6px;overflow-x:auto;scrollbar-width:none"><sc-for list="{{ modTabs }}" as="t" hint-placeholder-count="8"><button type="button" onClick="{{ t.go }}" style="flex:none;height:32px;padding:0 14px;border-radius:999px;border:1px solid {{ t.bd }};background:{{ t.bg }};color:{{ t.fg }};font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap">{{ t.n }}</button></sc-for></div>
+      <div style="display:flex;justify-content:flex-end;align-items:center;gap:6px">
+        <button type="button" onClick="{{ mzOut }}" aria-label="Zoom out" style="width:32px;height:32px;border-radius:8px;border:1px solid #E5E5E5;background:#FFFFFF;cursor:pointer;font-size:16px">−</button>
+        <span style="min-width:48px;text-align:center;font-size:12px;font-weight:600;font-variant-numeric:tabular-nums">{{ mzPct }}</span>
+        <button type="button" onClick="{{ mzIn }}" aria-label="Zoom in" style="width:32px;height:32px;border-radius:8px;border:0;background:#16A37A;color:#FFFFFF;cursor:pointer;font-size:16px">+</button>
+        <button type="button" onClick="{{ mzFit }}" style="height:32px;padding:0 12px;border-radius:8px;border:1px solid #E5E5E5;background:#FFFFFF;cursor:pointer;font-family:inherit;font-size:12px">Fit</button>
+      </div>
+      <div data-lenis-prevent="" style="max-height:{{ mzBoxH }};overflow:auto;border-radius:10px;background:#FFFFFF">
+        <img src="assets/hr3-mod-1.png" alt="Module 1" decoding="async" style="display:{{ md1 }};width:{{ mzW }};max-width:none;height:auto;border-radius:10px"><img src="assets/hr3-mod-2.png" alt="Module 2" decoding="async" style="display:{{ md2 }};width:{{ mzW }};max-width:none;height:auto;border-radius:10px"><img src="assets/hr3-mod-3.png" alt="Module 3" decoding="async" style="display:{{ md3 }};width:{{ mzW }};max-width:none;height:auto;border-radius:10px"><img src="assets/hr3-mod-4.png" alt="Module 4" decoding="async" style="display:{{ md4 }};width:{{ mzW }};max-width:none;height:auto;border-radius:10px"><img src="assets/hr3-mod-5.png" alt="Module 5" decoding="async" style="display:{{ md5 }};width:{{ mzW }};max-width:none;height:auto;border-radius:10px"><img src="assets/hr3-mod-6.png" alt="Module 6" decoding="async" style="display:{{ md6 }};width:{{ mzW }};max-width:none;height:auto;border-radius:10px"><img src="assets/hr3-mod-7.png" alt="Module 7" decoding="async" style="display:{{ md7 }};width:{{ mzW }};max-width:none;height:auto;border-radius:10px"><img src="assets/hr3-mod-8.png" alt="Module 8" decoding="async" style="display:{{ md8 }};width:{{ mzW }};max-width:none;height:auto;border-radius:10px">
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:10px">
+        <div style="grid-column:1 / -1;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 16px;border-radius:12px;background:#000000;color:#FFFFFF"><span style="display:flex;flex-direction:column;gap:2px"><b style="font-size:16px">{{ modCur.n }}</b><span style="font-size:13px;color:#A1A1A1">{{ modCur.d }}</span></span><span style="display:flex;gap:6px"><button type="button" onClick="{{ modPrev }}" aria-label="Previous module" style="width:32px;height:32px;border-radius:50%;border:1px solid #404040;background:transparent;color:#FFFFFF;cursor:pointer">←</button><button type="button" onClick="{{ modNext }}" aria-label="Next module" style="width:32px;height:32px;border-radius:50%;border:0;background:#16A37A;color:#FFFFFF;cursor:pointer">→</button></span></div>
+        <sc-for list="{{ modCur.why }}" as="w" hint-placeholder-count="3"><div style="display:flex;gap:10px;align-items:flex-start;padding:14px 16px;border-radius:12px;background:#FFFFFF;transition:transform .2s" style-hover="transform:translateY(-2px)"><span style="width:22px;height:22px;flex:none;border-radius:50%;border:1px solid #000000;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center">{{ w.n }}</span><span style="display:flex;flex-direction:column;gap:2px"><b style="font-size:13px">{{ w.t }}</b><span style="font-size:12px;color:#737373">{{ w.d }}</span></span></div></sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="ch-process" style="display:flex;flex-direction:column;gap:20px">
+    <span style="font-size:13px;font-weight:600;color:#16A37A">06 · Process</span>
+    <h2 style="margin:0;font-size:clamp(30px,4vw,48px);font-weight:600;letter-spacing:-0.04em;line-height:1.05">Research, define, design.</h2>
+    <p style="margin:0;max-width:680px;font-size:clamp(16px,1.6vw,18px);line-height:1.55;color:#000000;text-wrap:pretty">Six months with the founders, a PM and developers, from recruiter interviews to a design system built on shadcn/ui.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px">
+      <sc-for list="{{ phases }}" as="p" hint-placeholder-count="3"><button type="button" onClick="{{ p.go }}" style="border:1px solid {{ p.bd }};border-radius:14px;background:{{ p.bg }};color:{{ p.fg }};padding:22px;display:flex;flex-direction:column;gap:14px;text-align:left;font-family:inherit;cursor:pointer;transition:all .25s"><span style="display:flex;justify-content:space-between;width:100%;font-size:12px;opacity:.6"><span>{{ p.num }}</span><span>{{ p.count }}</span></span><b style="font-size:20px;letter-spacing:-0.02em">{{ p.t }}</b><span style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ p.items }}" as="it" hint-placeholder-count="4"><span style="height:28px;padding:0 12px;border-radius:999px;background:{{ p.chip }};color:{{ p.chipFg }};font-size:12px;display:flex;align-items:center;white-space:nowrap">{{ it }}</span></sc-for></span></button></sc-for>
+    </div>
+  </section>
+
+  <section id="ch-proto" style="display:flex;flex-direction:column;gap:20px">
+    <span style="font-size:13px;font-weight:600;color:#16A37A">07 · Prototype</span>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap"><h2 style="margin:0;font-size:clamp(30px,4vw,48px);font-weight:600;letter-spacing:-0.04em;line-height:1.05">Try it yourself.</h2><a href="https://baranwalsumit70-gif.github.io/Tvarah-Prototype/" target="_blank" rel="noopener" style="height:40px;padding:0 18px;border-radius:999px;background:#16A37A;color:#FFFFFF;font-size:14px;font-weight:500;text-decoration:none;display:flex;align-items:center;gap:8px">Open full screen ↗</a></div>
+    <sc-if value="{{ protoWide }}" hint-placeholder-val="{{ true }}">
+      <div ref="{{ protoBox }}" style="position:relative;left:50%;transform:translateX(-50%);width:min(1440px, calc(100vw - 24px));border-radius:16px;background:#F5F5F5;padding:clamp(8px,1.2vw,14px);box-sizing:border-box;display:flex;justify-content:center">
+      <div onMouseLeave="{{ protoSleep }}" style="position:relative;width:100%;aspect-ratio:1400/1000;border-radius:10px;overflow:hidden;background:#FFFFFF"><iframe src="https://baranwalsumit70-gif.github.io/Tvarah-Prototype/?v=1792084802147" title="Tvarah prototype" loading="lazy" allow="fullscreen; clipboard-write" style="position:absolute;left:0;top:0;width:100%;height:100%;border:0"></iframe>
+        <sc-if value="{{ protoIdle }}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{ protoWake }}" aria-label="Interact with the prototype" style="position:absolute;inset:0;border:0;padding:0 0 28px;background:transparent;cursor:pointer;display:flex;align-items:flex-end;justify-content:center"><span style="height:40px;padding:0 18px;border-radius:999px;background:#000000;color:#FFFFFF;font-family:inherit;font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px;box-shadow:0 8px 24px -8px rgb(0 0 0 / .4)">Click to interact</span></button></sc-if>
+      </div></div>
+    </sc-if>
+    <sc-if value="{{ protoNarrow }}" hint-placeholder-val="{{ false }}">
+      <div style="border-radius:16px;background:#000000;color:#FFFFFF;padding:24px;display:flex;flex-direction:column;gap:16px"><span style="font-size:15px;line-height:1.5">The prototype is built for desktop. Open it in a new tab to try the full flow.</span><a href="https://baranwalsumit70-gif.github.io/Tvarah-Prototype/" target="_blank" rel="noopener" style="height:44px;width:max-content;padding:0 20px;border-radius:999px;background:#16A37A;color:#FFFFFF;font-size:14px;font-weight:500;text-decoration:none;display:flex;align-items:center">Open prototype ↗</a></div>
+    </sc-if>
+  </section>
+
+  <section id="ch-impact" style="display:flex;flex-direction:column;gap:20px">
+    <span style="font-size:13px;font-weight:600;color:#16A37A">08 · Impact</span>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap"><h2 style="margin:0;font-size:clamp(30px,4vw,48px);font-weight:600;letter-spacing:-0.04em;line-height:1.05">Before and after.</h2><span style="font-size:13px;color:#737373">Drag to compare</span></div>
+    <div ref="{{ baRef }}" onMouseMove="{{ baMove }}" style="position:relative;width:100%;min-height:clamp(360px,46vw,440px);border-radius:16px;overflow:hidden;cursor:ew-resize;user-select:none;touch-action:pan-y">
+      <div style="position:absolute;inset:0;background:#000000;color:#FFFFFF;padding:clamp(20px,4vw,40px);display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;text-align:right">
+        <span style="font-size:13px;font-weight:600;color:#16A37A">With Pulse</span>
+        <div style="display:flex;flex-direction:column;gap:18px"><sc-for list="{{ baRows }}" as="r" hint-placeholder-count="3"><span style="display:flex;flex-direction:column"><b style="font-size:clamp(30px,4.4vw,44px);letter-spacing:-0.04em;line-height:1">{{ r.av }}</b><span style="font-size:13px;color:#A1A1A1">{{ r.al }}</span></span></sc-for></div>
+      </div>
+      <div style="position:absolute;inset:0;background:#F5F5F5;padding:clamp(20px,4vw,40px);display:flex;flex-direction:column;justify-content:space-between;clip-path:inset(0 {{ baClip }} 0 0)">
+        <span style="font-size:13px;font-weight:600;color:#737373">Before</span>
+        <div style="display:flex;flex-direction:column;gap:18px"><sc-for list="{{ baRows }}" as="r" hint-placeholder-count="3"><span style="display:flex;flex-direction:column"><b style="font-size:clamp(30px,4.4vw,44px);letter-spacing:-0.04em;line-height:1;color:#A3A3A3">{{ r.bv }}</b><span style="font-size:13px;color:#737373">{{ r.bl }}</span></span></sc-for></div>
+      </div>
+      <div style="position:absolute;top:0;bottom:0;left:{{ baPos }};width:2px;margin-left:-1px;background:#000000;pointer-events:none"><span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:#16A37A;border:2px solid #16A37A;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path><path d="m9 18 6-6-6-6" transform="translate(6 0)"></path></svg></span></div>
+      <input type="range" min="4" max="96" step="1" value="{{ baVal }}" onChange="{{ baInput }}" aria-label="Compare before and after" style="position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;touch-action:pan-y">
+    </div>
+  </section>
+
+  <section id="ch-learn" style="display:flex;flex-direction:column;gap:20px">
+    <span style="font-size:13px;font-weight:600;color:#16A37A">09 · Learnings</span>
+    <h2 style="margin:0;font-size:clamp(30px,4vw,48px);font-weight:600;letter-spacing:-0.04em;line-height:1.05">What I learned.</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px">
+      <div style="padding:22px;border-radius:14px;border:1px solid #EDEDED;display:flex;flex-direction:column;gap:10px"><span style="font-size:12px;font-weight:600;color:#16A37A">01</span><b style="font-size:18px;letter-spacing:-0.02em">Explain every score</b><span style="font-size:14px;line-height:1.5;color:#525252">A number alone was not enough. Showing the reason behind each point is what made the score usable.</span></div>
+      <div style="padding:22px;border-radius:14px;border:1px solid #EDEDED;display:flex;flex-direction:column;gap:10px"><span style="font-size:12px;font-weight:600;color:#16A37A">02</span><b style="font-size:18px;letter-spacing:-0.02em">Lead with the next action</b><span style="font-size:14px;line-height:1.5;color:#525252">Every screen ends in a decision: shortlist, screen or reject. Reading comes second.</span></div>
+      <div style="padding:22px;border-radius:14px;border:1px solid #EDEDED;display:flex;flex-direction:column;gap:10px"><span style="font-size:12px;font-weight:600;color:#16A37A">03</span><b style="font-size:18px;letter-spacing:-0.02em">Build with the devs' system</b><span style="font-size:14px;line-height:1.5;color:#525252">Designing on shadcn/ui kept design and code in sync and cut handoff time.</span></div>
+    </div>
+  </section>
+
+  <a href="Ferry ERP Prototype.dc.html" style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:28px clamp(16px,3vw,28px);border-radius:16px;background:#F5F5F5;text-decoration:none;transition:background .2s, color .2s" style-hover="background:#000000;color:#FFFFFF;opacity:1">
+    <span style="display:flex;flex-direction:column;gap:4px"><span style="font-size:13px;opacity:.6">Next</span><span style="font-size:clamp(22px,3vw,32px);font-weight:600;letter-spacing:-0.03em">Assam Ferry System</span></span>
+    <span style="width:48px;height:48px;flex:none;border-radius:50%;background:#16A37A;color:#FFFFFF;display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span>
+  </a>
+</main>
+<button type="button" onClick="{{ toggleMusic }}" aria-label="{{ musicAria }}" title="{{ musicAria }}" aria-pressed="{{ musicOn }}" style="position:fixed;right:72px;bottom:20px;z-index:50;width:44px;height:44px;box-sizing:border-box;padding:0;border:1px solid #E5E5E5;border-radius:50%;background:#FFFFFF;color:#000000;box-shadow:0 8px 24px -12px rgb(0 0 0 / .35);display:flex;align-items:center;justify-content:center;gap:2px;cursor:pointer;text-decoration:none;transition:transform .15s, box-shadow .15s" style-hover="transform:translateY(-2px);box-shadow:0 12px 28px -12px rgb(0 0 0 / .45)"><sc-if value="{{ musicOn }}" hint-placeholder-val="{{ false }}"><sc-for list="{{ musicBars }}" as="b" hint-placeholder-count="4"><span style="width:2.5px;height:{{ b.h }};border-radius:2px;background:currentColor;transition:height .3s ease"></span></sc-for></sc-if><sc-if value="{{ musicOff }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle><path d="M2 2l20 20" stroke-width="1.6"></path></svg></sc-if></button>
+<a href="Portfolio v2.dc.html?chat=1" aria-label="Ask Sumit anything" title="Ask Sumit anything" style="position:fixed;right:20px;bottom:20px;z-index:50;width:44px;height:44px;box-sizing:border-box;padding:0;border:1px solid #E5E5E5;border-radius:50%;background:#FFFFFF;color:#000000;box-shadow:0 8px 24px -12px rgb(0 0 0 / .35);display:flex;align-items:center;justify-content:center;gap:2px;cursor:pointer;text-decoration:none;transition:transform .15s, box-shadow .15s" style-hover="transform:translateY(-2px);box-shadow:0 12px 28px -12px rgb(0 0 0 / .45)"><span style="width:100%;height:100%;border-radius:50%;display:flex;align-items:center;justify-content:center" style-hover="animation:sumoSway .9s ease-in-out infinite"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="overflow:visible"><circle cx="12" cy="4.2" r="2.2" fill="currentColor" stroke="none"></circle><circle cx="12" cy="14" r="7.5"></circle><path d="M9 13.2h.01"></path><path d="M15 13.2h.01"></path><path d="M9.5 16.2c1.4 1.4 3.6 1.4 5 0"></path></svg></span></a>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { tab: 0, tool: -1, pTab: 0, j: 0, jd: 0, act: "", phase: 0, active: -1, rp: 0, narrow: false, protoLive: false };
+  CH = [["Problem", "problem"], ["Research", "research"], ["Insight", "insight"], ["Flow", "flow"], ["Design", "design"], ["Process", "process"], ["Prototype", "proto"], ["Impact", "impact"], ["Learnings", "learn"]];
+  MODS = [
+    ["Dashboard", "KPIs, funnel, interviews.", [["Today first", "Agenda before analytics"], ["Funnel at a glance", "Spot drop-off by stage"], ["One-click jump", "Every KPI opens its list"]]],
+    ["Candidates", "Parse resumes, Pulse scores.", [["Bulk upload", "Drop many resumes at once"], ["Score in the row", "Rank without opening a profile"], ["Smart filters", "Job, status, score range"]]],
+    ["Jobs", "JD requirements, auto-extracted.", [["Paste or upload", "No manual form filling"], ["Editable extracts", "AI drafts, recruiter confirms"], ["Must vs nice", "Weighted requirements"]]],
+    ["AI insight", "Strengths, gaps, flags.", [["Explainable score", "Every point shows a reason"], ["Traffic-light tags", "Strengths, gaps, flags"], ["Flags become questions", "Feeds the screening call"]]],
+    ["Matching", "Candidate to JD fit, ranked.", [["Ranked list", "Best fit on top"], ["Skill-by-skill bars", "See where the fit breaks"], ["Compare side by side", "Two candidates, one view"]]],
+    ["Screening", "Questionnaire to panel decision.", [["Guided script", "Same questions, fair process"], ["Quick ratings", "Weak, OK, Strong"], ["Auto summary", "Ready for the panel"]]],
+    ["Ask Tvarah", "AI assistant in context.", [["Scoped context", "Candidate, job or pipeline"], ["Suggested prompts", "No blank-box anxiety"], ["Cited answers", "Links back to the source"]]],
+    ["Client portal", "Approve shortlists in one click.", [["Client-safe view", "Only what clients need"], ["One-click verdict", "Approve or reject"], ["Live status", "Recruiter sees it instantly"]]]
+  ];
+  JDS = [
+    { t: "Senior React Developer", m: "5–8 yrs · Bengaluru · Hybrid", must: ["React", "TypeScript", "System design"], nice: ["GraphQL", "Testing"], score: 86, fit: [95, 88, 72, 40, 64] },
+    { t: "Full-stack Engineer", m: "4–7 yrs · Pune · Remote", must: ["Node.js", "React", "SQL"], nice: ["AWS", "Docker"], score: 74, fit: [82, 70, 55, 30, 60] },
+    { t: "Frontend Lead", m: "8+ yrs · Gurugram · Onsite", must: ["React", "Team lead", "Architecture"], nice: ["Mentoring", "A11y"], score: 68, fit: [90, 50, 62, 45, 58] }
+  ];
+  baRef = React.createRef(); protoBox = React.createRef(); pdfWrap = React.createRef(); pdfPages = React.createRef();
+  componentDidMount() {
+    this.loadPdf();
+    this._onScroll = () => { if (this._raf) return; this._raf = requestAnimationFrame(() => { this._raf = 0; let a = -1; this.CH.forEach(([, id], i) => { const el = document.getElementById("ch-" + id); if (el && el.getBoundingClientRect().top < 160) a = i; }); const d = document.documentElement, m = d.scrollHeight - d.clientHeight, p = m > 0 ? Math.round(d.scrollTop / m * 1000) / 10 : 0; if (a !== this.state.active || p !== this.state.rp) this.setState({ active: a, rp: p }); }); };
+    this._onResize = () => { const n = window.innerWidth < 720, el = this.protoBox.current, cs = el ? getComputedStyle(el) : null, cw = el ? el.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight) : 1200, k = cw / 1400; if (n !== this.state.narrow || Math.abs(k - (this.state.pk || 0)) > 0.002) this.setState({ narrow: n, pk: k }); };
+    setTimeout(this._onResize, 50);
+    window.addEventListener("scroll", this._onScroll, { passive: true }); window.addEventListener("resize", this._onResize); this._onResize(); this._onScroll();
+    this._io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = 1; e.target.style.transform = "none"; this._io.unobserve(e.target); } }), { threshold: 0.06 });
+    document.querySelectorAll("main > section").forEach(el => { el.style.scrollMarginTop = "72px"; el.style.opacity = 0; el.style.transform = "translateY(24px)"; el.style.transition = "opacity .7s ease, transform .7s ease"; this._io.observe(el); });
+  }
+  async loadPdf() {
+    try {
+      const lib = await import("https://cdn.jsdelivr.net/npm/pdfjs-dist@4.4.168/build/pdf.min.mjs");
+      lib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.4.168/build/pdf.worker.min.mjs";
+      this.pdf = await lib.getDocument("assets/hr-ui-scan.pdf").promise;
+      const p1 = await this.pdf.getPage(1); this.pdfW = p1.getViewport({ scale: 1 }).width;
+      this.fitPdf();
+    } catch (e) { this.setState({ pdfErr: true }); }
+  }
+  fitPdf() { const w = this.pdfWrap.current; if (!w || !this.pdfW) return; this.fitZ = (w.clientWidth - 32) / this.pdfW; this.setZoom(this.fitZ); }
+  setZoom(z) { const f = this.fitZ || 1; z = Math.max(f * 0.5, Math.min(f * 8, z)); this.setState({ pdfZ: z }); clearTimeout(this._pdfT); this._pdfT = setTimeout(() => this.renderPdf(z), 60); }
+  async renderPdf(z) {
+    const box = this.pdfPages.current; if (!box || !this.pdf) return;
+    const id = (this._pdfR = (this._pdfR || 0) + 1), frag = [];
+    for (let i = 1; i <= this.pdf.numPages; i++) {
+      const pg = await this.pdf.getPage(i), base = pg.getViewport({ scale: z }); let dpr = Math.min(2, window.devicePixelRatio || 1); dpr = Math.min(dpr, 8000 / base.width, 8000 / base.height, Math.sqrt(16e6 / (base.width * base.height))); const vp = pg.getViewport({ scale: z * dpr });
+      const c = document.createElement("canvas"); c.width = vp.width; c.height = vp.height;
+      c.style.width = vp.width / dpr + "px"; c.style.height = vp.height / dpr + "px"; c.style.background = "#FFFFFF"; c.style.borderRadius = "8px"; c.style.boxShadow = "0 8px 24px -16px rgb(0 0 0 / .3)";
+      await pg.render({ canvasContext: c.getContext("2d"), viewport: vp }).promise;
+      if (id !== this._pdfR) return; frag.push(c);
+    }
+    box.replaceChildren(...frag); this.setState({ pdfReady: true });
+  }
+  goProto(e) {
+    e.preventDefault();
+    const sec = document.getElementById("ch-proto"); if (!sec) return;
+    sec.style.opacity = 1; sec.style.transform = "none";
+    const y0 = window.scrollY, y1 = sec.getBoundingClientRect().top + y0 - 72, d = y1 - y0, T = Math.min(1400, 600 + Math.abs(d) * 0.15), t0 = performance.now();
+    const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    const step = now => { const t = Math.min(1, (now - t0) / T); window.scrollTo(0, y0 + d * ease(t)); if (t < 1) requestAnimationFrame(step); else this.riseProto(); };
+    requestAnimationFrame(step);
+  }
+  riseProto() {
+    const el = this.protoBox.current; if (!el || !el.animate) return;
+    el.animate([{ transform: "translateX(-50%) translateY(80px) scale(.96)", opacity: 0 }, { transform: "translateX(-50%) translateY(0) scale(1)", opacity: 1 }], { duration: 800, easing: "cubic-bezier(.2,.8,.2,1)" });
+  }
+  baSet(x) { const el = this.baRef.current; if (!el) return; const r = el.getBoundingClientRect(); this.setState({ ba: Math.max(4, Math.min(96, (x - r.left) / r.width * 100)) }); }
+  componentWillUnmount() { clearInterval(this._mBar); window.MusicBox && window.MusicBox.stop(); clearInterval(this._blink); clearTimeout(this._pvT); window.removeEventListener("scroll", this._onScroll); window.removeEventListener("resize", this._onResize); this._io && this._io.disconnect(); }
+  pvStart() { this.setState({ pv: true }); clearInterval(this._blink); this._blink = setInterval(() => { this.setState({ blink: true }); setTimeout(() => this.setState({ blink: false }), 140); }, 1600); }
+  pvStop() { clearInterval(this._blink); this.setState({ pv: false, blink: false }); }
+  renderVals() {
+    const s = this.state, kv = a => a.map(([v, l]) => ({ v, l })), set = o => () => this.setState(o);
+    const mOn = !!s.musicOn, ph = s.mPh || 0;
+    const musicVals = { musicOn: mOn, musicOff: !mOn, musicAria: mOn ? "Turn music off" : "Play music box",
+      musicBars: [0, 1, 2, 3].map(i => ({ h: mOn ? (3 + Math.round((Math.sin(ph * 0.9 + i * 1.7) + 1) * 4.5)) + "px" : "3px" })),
+      toggleMusic: () => { if (this.state.musicOn) { clearInterval(this._mBar); window.MusicBox && window.MusicBox.stop(); this.setState({ musicOn: false }); } else { window.MusicBox && window.MusicBox.start(); this._mBar = setInterval(() => this.setState({ mPh: (this.state.mPh || 0) + 1 }), 320); this.setState({ musicOn: true }); } } };
+    const sel = (on) => ({ bg: on ? "#000000" : "#FFFFFF", fg: on ? "#FFFFFF" : "#000000", bd: on ? "#000000" : "#E5E5E5" });
+    const pts = [[150, 80], [570, 80], [120, 320], [600, 320], [360, 372]];
+    const TOOLS = [["Spreadsheets", "Status lives in a sheet nobody updates."], ["Job portals", "Resumes downloaded one by one."], ["Email", "Client feedback buried in threads."], ["Chat", "Decisions lost in group chats."], ["Notes", "Interview notes on paper or Docs."]];
+    const J = ["Upload", "Validate", "Match a JD", "AI parse", "Insight", "Act"];
+    const JD = this.JDS[s.jd];
+    const PH = [["01", "Research", ["Recruiter interviews", "12-product scan", "Teardown", "Persona"]], ["02", "Define", ["PRD with PM", "Schema study", "IA", "User flows"]], ["03", "Design", ["Design system", "Hi-fi + states", "AI prototyping", "Website"]]];
+    const mod = this.MODS[s.tab];
+    return { ...musicVals,
+      chapters: this.CH.map(([t, id], i) => ({ t, href: "#ch-" + id, bg: s.active === i ? "#E8F6F1" : "transparent", fg: s.active === i ? "#16A37A" : "#737373" })), readPct: (s.rp || 0) + "%",
+      metaChips: [["Role", "Product design"], ["Time", "6 months"], ["Team", "Founders, PM, devs"], ["Stack", "Figma, shadcn/ui"]].map(([k, v]) => ({ k, v })),
+      tools: TOOLS.map(([n], i) => { const on = s.tool === i; return { n, l: (pts[i][0] / 7.2) + "%", t: (pts[i][1] / 4) + "%", cx: pts[i][0], cy: pts[i][1], line: on ? "#16A37A" : "#D4D4D4", dash: on ? "0" : "4 4", ...sel(on), enter: set({ tool: i }), leave: set({ tool: -1 }) }; }),
+      toolNote: s.tool >= 0 ? TOOLS[s.tool][1] : "Hover a tool to see the pain.",
+      pvIn: () => this.pvStart(), pvOut: () => this.pvStop(),
+      pvFloat: s.pv ? "floatY 2.4s ease-in-out infinite" : "none", pvRing: s.pv ? "pulseRing 1.6s ease-out infinite" : "none", pvRingOp: s.pv ? 1 : 0,
+      pvBody: s.pv ? "translateY(-2px)" : "none", pvHead: s.pv ? "rotate(-6deg)" : "none", pvBrow: s.pv ? "translateY(-2px)" : "none", pvEye: s.blink ? "scaleY(.1)" : "none",
+      pvMouth: s.pv ? "M51 69c4 6 14 6 18 0Z" : "M53 70c4 3 10 3 14 0", pvMouthFill: s.pv ? "#FFFFFF" : "none",
+      pvHand: s.pv ? "translateY(0) rotate(-14deg)" : "translateY(30px) rotate(10deg)", pvHandOp: s.pv ? 1 : 0,
+      pvLabel: "Hi, I'm Sandeep", pvLabelOp: s.pv ? 1 : 0,
+      pvTap: () => { this.pvStart(); clearTimeout(this._pvT); this._pvT = setTimeout(() => this.pvStop(), 2500); }, personaBd: s.pTab ? "#000000" : "#EDEDED",
+      personaTabs: ["Goals", "Pains"].map((t, i) => ({ t, go: set({ pTab: i }), ...sel(s.pTab === i) })),
+      personaItems: (s.pTab ? ["Verifying resumes by hand", "Chasing status across 5 tools", "Losing top candidates in 48 hrs"] : ["Shortlist in minutes", "Trust the candidate data", "Keep clients updated live"]).map(t => ({ t, dot: s.pTab ? "#DC2626" : "#16A37A" })),
+      probNums: kv([["4–6 hrs", "lost daily verifying resumes"], ["56%", "saw resume fraud (NASSCOM 2024)"], ["48 hrs", "before a top candidate is taken"]]),
+      products: [["Phenom", "phenom.com"], ["Ashby", "ashbyhq.com"], ["Paraform", "paraform.com"], ["Juicebox", "juicebox.ai"], ["Cocoon", "cocoon.com"], ["Thanks Ben", "thanksben.com"], ["Eightfold", "eightfold.ai"], ["Mercor", "mercor.com"], ["Metaview", "metaview.ai"], ["Pyn", "pyn.com"], ["Worksome", "worksome.com"], ["Remofirst", "remofirst.com"]].map(([n, d]) => ({ n, url: "https://" + d, logo: "https://www.google.com/s2/favicons?domain=" + d + "&sz=64" })),
+      journey: J.map((t, i) => { const done = i < s.j, cur = i === s.j; return { t, mark: done ? "✓" : i + 1, go: set({ j: i }), bg: cur ? "#16A37A" : done ? "#000000" : "#FFFFFF", fg: cur || done ? "#FFFFFF" : "#000000", bd: cur ? "#16A37A" : done ? "#000000" : "#D4D4D4", fw: cur ? 600 : 400, rowBg: cur ? "#F5F5F5" : "transparent" }; }),
+      jCur: { t: J[s.j], pos: (s.j + 1) + " / " + J.length }, jPct: ((s.j + 1) / J.length * 100) + "%",
+      jPrev: () => this.setState({ j: Math.max(0, s.j - 1) }), jNext: () => this.setState({ j: s.j >= J.length - 1 ? 0 : s.j + 1, act: s.j >= J.length - 1 ? "" : s.act }), jNextLabel: s.j >= J.length - 1 ? "Restart" : "Next",
+      jUpload: s.j === 0, jValidate: s.j === 1, jJD: s.j === 2, jParse: s.j === 3, jInsight: s.j === 4, jAct: s.j === 5,
+      resumeExp: [["Senior Frontend Engineer", "2021 – now", "Nimbus Retail", "Scaled React app to 2M monthly users"], ["Frontend Developer", "2018 – 2021", "Kite Labs", "Built the design system in TypeScript"]].map(([r, y, c, d]) => ({ r, y, c, d })),
+      resumeSkills: ["React", "TypeScript", "Node.js", "Jest", "Redux", "System design"],
+      checks: ["PDF readable, 2 pages", "Contact details found", "Experience dates consistent", "LinkedIn profile matches"],
+      jdTabs: this.JDS.map((d, i) => ({ t: d.t, go: set({ jd: i }), ...sel(s.jd === i) })),
+      jd: { ...JD, dash: (JD.score / 100 * 94.2).toFixed(1) + " 94.2" },
+      matchRows: ["React", "TypeScript", "System design", "GraphQL", "Testing"].map((t, i) => { const v = JD.fit[i]; return { t, v: v + "%", w: v + "%", c: v >= 70 ? "#16A37A" : v >= 50 ? "#A3A3A3" : "#DC2626" }; }),
+      insightTags: [["#16A37A", "Strength", "Led React app to 2M users"], ["#D97706", "Gap", "Limited GraphQL"], ["#DC2626", "Flag", "8-month gap in 2022"]].map(([dot, k, v]) => ({ dot, k, v })),
+      acts: [["Shortlist", "Sent to the client portal for approval."], ["Screen first", "Screening call booked with flagged questions."], ["Reject", "Candidate notified with feedback."]].map(([t, n]) => { const on = s.act === n; return { t, go: set({ act: n }), bg: on ? "#16A37A" : "#FFFFFF", fg: on ? "#FFFFFF" : "#000000", bd: on ? "#16A37A" : "#E5E5E5" }; }),
+      actNote: s.act || "Pick an action. Pulse recommends Shortlist.",
+      modTabs: this.MODS.map(([n], i) => ({ n, src: "assets/hr3-mod-" + (i + 1) + ".png", disp: s.tab === i ? "block" : "none", go: set({ tab: i }), ...sel(s.tab === i) })),
+      ...Object.fromEntries([0,1,2,3,4,5,6,7].map(i => ["md" + (i + 1), s.tab === i ? "block" : "none"])), modCur: { n: mod[0], d: mod[1], why: mod[2].map(([t, d], i) => ({ n: i + 1, t, d })) },
+      mzW: (s.mz || 1) * 100 + "%", mzPct: s.mz && s.mz > 1 ? Math.round(s.mz * 100) + "%" : "Fit", mzBoxH: s.mz && s.mz > 1 ? "min(80vh,760px)" : "none",
+      mzIn: () => this.setState({ mz: Math.min(4, (s.mz || 1) * 1.5) }), mzOut: () => this.setState({ mz: Math.max(1, (s.mz || 1) / 1.5) }), mzFit: () => this.setState({ mz: 1 }),
+      modPrev: () => this.setState({ tab: (s.tab + 7) % 8 }), modNext: () => this.setState({ tab: (s.tab + 1) % 8 }),
+      phases: PH.map(([num, t, items], i) => { const on = s.phase === i; return { num, t, items, count: items.length + " outputs", go: set({ phase: i }), bg: on ? "#000000" : "#F5F5F5", fg: on ? "#FFFFFF" : "#000000", bd: on ? "#000000" : "#F5F5F5", chip: on ? "#16A37A" : "#FFFFFF", chipFg: on ? "#FFFFFF" : "#000000" }; }),
+      goProto: e => this.goProto(e), protoBox: this.protoBox, pK: (s.pk || 0.8).toFixed(4), pW: Math.round(1400 * (s.pk || 0.8)) + "px", pH: Math.round(1000 * (s.pk || 0.8)) + "px", protoWide: !s.narrow, protoNarrow: s.narrow, protoIdle: !s.protoLive, protoWake: set({ protoLive: true }), protoSleep: set({ protoLive: false }),
+      pdfWrap: this.pdfWrap, pdfPages: this.pdfPages, pdfPct: Math.round((s.pdfZ || 1) / (this.fitZ || 1) * 100) + "%", pdfLoadDisp: s.pdfReady ? "none" : "block",
+      pdfIn: () => this.setZoom((s.pdfZ || 1) * 1.25), pdfOut: () => this.setZoom((s.pdfZ || 1) / 1.25), pdfFit: () => this.fitPdf(),
+      fzW: s.fz ? Math.round(1848 * s.fz) + "px" : "100%", fzPct: s.fz ? Math.round(s.fz * 100) + "%" : "Fit", fzBoxH: s.fz ? "min(80vh,760px)" : "auto",
+      fzIn: () => this.setState({ fz: Math.min(2, (s.fz || 0.45) * 1.25) }), fzOut: () => this.setState({ fz: (s.fz || 0.45) / 1.25 < 0.35 ? 0 : (s.fz || 0.45) / 1.25 }), fzFit: () => this.setState({ fz: 0 }),
+      baRef: this.baRef, baPos: (s.ba ?? 50) + "%", baClip: (100 - (s.ba ?? 50)) + "%",
+      baMove: e => this.baSet(e.clientX), baVal: Math.round(s.ba ?? 50), baInput: e => this.setState({ ba: +e.target.value }),
+      baRows: [["5+", "tools per hire", "1", "connected workspace"], ["Hours", "to verify a resume", "Minutes", "to an explained score"], ["None", "live pipeline view", "Live", "pipeline funnel"]].map(([bv, bl, av, al]) => ({ bv, bl, av, al }))
+    };
+  }
+}
+</script>
+</body>
+</html>
