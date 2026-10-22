@@ -8,7 +8,7 @@
 <body>
 <x-dc>
 <helmet>
-  <style>@keyframes sumoSway{0%,100%{transform:translateX(0) rotate(0)}25%{transform:translateX(-3px) rotate(-8deg)}75%{transform:translateX(3px) rotate(8deg)}}</style>
+  <style>button:not(:disabled):active,[role="button"]:active{scale:.97;transition:scale .12s cubic-bezier(.23,1,.32,1)}@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}@keyframes sumoSway{0%,100%{transform:translateX(0) rotate(0)}25%{transform:translateX(-3px) rotate(-8deg)}75%{transform:translateX(3px) rotate(8deg)}}</style>
   <script src="music-box.js"></script>
   <link rel="stylesheet" href="_ds/shadcn-ui-design-system-78dd7306-68f4-4f3d-a1b1-8768c357041b/styles.css">
   <script src="image-slot.js"></script>
@@ -16,7 +16,8 @@
   @keyframes pulseRing{0%{transform:scale(1);opacity:.5}100%{transform:scale(1.6);opacity:0}}
   @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}</style>
 </helmet>
-<div style="position:sticky;top:0;z-index:10;background:rgb(255 255 255 / .92);backdrop-filter:blur(8px);border-bottom:1px solid #EDEDED">
+<div aria-hidden="true" style="height:57px"></div>
+<div style="position:fixed;top:0;left:0;right:0;z-index:1000;background:rgb(255 255 255 / .92);backdrop-filter:blur(8px);border-bottom:1px solid #EDEDED">
   <div style="max-width:1120px;margin:0 auto;padding:0 clamp(20px,4vw,48px);height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px">
     <a href="Portfolio v2.dc.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;font-size:14px;font-weight:500;flex:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>Portfolio</a>
     <div style="display:flex;gap:4px;overflow-x:auto;font-size:13px;scrollbar-width:none"><sc-for list="{{ chapters }}" as="ch" hint-placeholder-count="7"><a href="{{ ch.href }}" style="text-decoration:none;white-space:nowrap;height:30px;padding:0 10px;border-radius:999px;display:flex;align-items:center;background:{{ ch.bg }};color:{{ ch.fg }};transition:background .15s, color .15s" style-hover="background:#E8F6F1;color:#16A37A;opacity:1">{{ ch.t }}</a></sc-for></div>
@@ -57,7 +58,7 @@
 <ellipse cx="38" cy="56" rx="4" ry="6" fill="#A9714B"></ellipse><ellipse cx="82" cy="56" rx="4" ry="6" fill="#A9714B"></ellipse>
 <path d="M38 50c-3-17 8-27 23-27 14 0 24 9 21 25-2-7-7-10-12-11-6 5-20 5-27 1-2 4-4 8-5 12Z" fill="#1A1A1A"></path>
 <path d="M39 46c0-5 2-9 4-11M81 46c0-5-1-8-3-10" stroke="#B5B5B5" stroke-width="3" fill="none" stroke-linecap="round"></path>
-<path d="M45 44l9-2M66 42l9 2" stroke="#1A1A1A" stroke-width="2.4" stroke-linecap="round" style="transform:{{ pvBrow }};transition:transform .3s"></path>
+<path d="M45 44l9-2M66 42l9 2" stroke="#1A1A1A" stroke-width="2.4" stroke-linecap="round" style="transform:{{ pvBrow }};transition:transform .3s cubic-bezier(.23,1,.32,1)"></path>
 <g style="transform:{{ pvEye }};transform-origin:60px 53px;transition:transform .12s"><ellipse cx="50" cy="53" rx="2.4" ry="2.8" fill="#000000"></ellipse><ellipse cx="70" cy="53" rx="2.4" ry="2.8" fill="#000000"></ellipse></g>
 <path d="M58 57c1 4 3 5 5 4" stroke="#8C5A3A" stroke-width="1.8" fill="none" stroke-linecap="round"></path>
 <path d="M50 65c3-2 7-2 10-1 3-1 7-1 10 1-3 2-7 2-10 1-3 1-7 1-10-1Z" fill="#2B2B2B"></path>
@@ -104,7 +105,7 @@
         <div style="margin-top:auto;padding:12px 14px;border-radius:10px;background:#F5F5F5;font-size:13px;line-height:1.45">“I spend more time checking resumes than talking to people.”</div>
       </div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px"><sc-for list="{{ probNums }}" as="n" hint-placeholder-count="3"><div style="padding:22px;border-radius:14px;background:#000000;color:#FFFFFF;display:flex;flex-direction:column;gap:6px;transition:transform .2s" style-hover="transform:translateY(-3px)"><b style="font-size:clamp(32px,4vw,44px);font-weight:600;letter-spacing:-0.045em;line-height:1">{{ n.v }}</b><span style="font-size:12px;color:#A1A1A1">{{ n.l }}</span></div></sc-for></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px"><sc-for list="{{ probNums }}" as="n" hint-placeholder-count="3"><div style="padding:22px;border-radius:14px;background:#000000;color:#FFFFFF;display:flex;flex-direction:column;gap:6px;transition:transform .2s cubic-bezier(.23,1,.32,1)" style-hover="transform:translateY(-3px)"><b style="font-size:clamp(32px,4vw,44px);font-weight:600;letter-spacing:-0.045em;line-height:1">{{ n.v }}</b><span style="font-size:12px;color:#A1A1A1">{{ n.l }}</span></div></sc-for></div>
   </section>
 
   <section id="ch-research" style="display:flex;flex-direction:column;gap:24px">
@@ -208,7 +209,7 @@
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:10px">
         <div style="grid-column:1 / -1;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:14px 16px;border-radius:12px;background:#000000;color:#FFFFFF"><span style="display:flex;flex-direction:column;gap:2px"><b style="font-size:16px">{{ modCur.n }}</b><span style="font-size:13px;color:#A1A1A1">{{ modCur.d }}</span></span><span style="display:flex;gap:6px"><button type="button" onClick="{{ modPrev }}" aria-label="Previous module" style="width:32px;height:32px;border-radius:50%;border:1px solid #404040;background:transparent;color:#FFFFFF;cursor:pointer">←</button><button type="button" onClick="{{ modNext }}" aria-label="Next module" style="width:32px;height:32px;border-radius:50%;border:0;background:#16A37A;color:#FFFFFF;cursor:pointer">→</button></span></div>
-        <sc-for list="{{ modCur.why }}" as="w" hint-placeholder-count="3"><div style="display:flex;gap:10px;align-items:flex-start;padding:14px 16px;border-radius:12px;background:#FFFFFF;transition:transform .2s" style-hover="transform:translateY(-2px)"><span style="width:22px;height:22px;flex:none;border-radius:50%;border:1px solid #000000;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center">{{ w.n }}</span><span style="display:flex;flex-direction:column;gap:2px"><b style="font-size:13px">{{ w.t }}</b><span style="font-size:12px;color:#737373">{{ w.d }}</span></span></div></sc-for>
+        <sc-for list="{{ modCur.why }}" as="w" hint-placeholder-count="3"><div style="display:flex;gap:10px;align-items:flex-start;padding:14px 16px;border-radius:12px;background:#FFFFFF;transition:transform .2s cubic-bezier(.23,1,.32,1)" style-hover="transform:translateY(-2px)"><span style="width:22px;height:22px;flex:none;border-radius:50%;border:1px solid #000000;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center">{{ w.n }}</span><span style="display:flex;flex-direction:column;gap:2px"><b style="font-size:13px">{{ w.t }}</b><span style="font-size:12px;color:#737373">{{ w.d }}</span></span></div></sc-for>
       </div>
     </div>
   </section>
